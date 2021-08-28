@@ -2,7 +2,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <p>
+        <p className="text-9xl">
           Hello World
         </p>
         <a
