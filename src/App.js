@@ -1,5 +1,5 @@
-import Login from "./Components/Login/Login";
-import Signup from "./Components/Login/Signup";
+import Login from "./components/login/Login";
+import Signup from "./components/login/Signup";
 
 export const API = "http://206.189.91.54";
 
