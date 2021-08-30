@@ -1,13 +1,13 @@
 import Login from "./Components/Login/Login";
-import axios from 'axios';
-import { useEffect } from 'react';
+import Signup from "./Components/Login/Signup";
 
-export const API = "206.189.91.54";
+export const API = "http://206.189.91.54";
 
 function App() {
   return (
     <div className="App">
-      <Login />
+      {/* <Login /> */}
+      <Signup />
     </div>
   );
 }
