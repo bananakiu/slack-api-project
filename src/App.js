@@ -6,34 +6,35 @@ export const API = "http://206.189.91.54";
 
 
 function App() {
-  const [logInForm, toggleLoginForm] = useState(true);
-  const [signUpForm, toggleSignUpForm] = useState(false);
-  const [userDashboard, toggleUserDashboard] = useState(false);
+  const [isOpenLoginPage, setIsOpenLoginPage] = useState(true);
+  const [isOpenSignUpPage, setIsOpenSignUpPage] = useState(false);
+  const [isOpenUserDashboard, setIsOpenUserDashboard] = useState(false);
+  const [accessToken, setAccessToken] = useState("");
+  const [client, setClient] = useState("");
+  const [expiry, setExpiry] = useState("");
+  const [uid, setUid] = useState("");
 
-
-const handleLogin = () => {
-  /* TEMP HANDLER for user/channel view || Can be renamed to anything */
-  // toggleUserDashboard(true); 
-  toggleLoginForm(false);
-  toggleUserDashboard(true);
+  const openPage = (page) => {
+    setIsOpenLoginPage(page==="login" ? true : false);
+    setIsOpenSignUpPage(page==="signup" ? true : false);
+    setIsOpenUserDashboard(page==="dashboard" ? true : false);
 }
-
-const handleSignup = () => {
-  toggleLoginForm(false);
-  toggleSignUpForm(true);
-}
-
-const handleCreateAccount = () => {
-  toggleUserDashboard(true);
-  toggleSignUpForm(false);
-}
-
 
   return (
     <div>
-      {logInForm && <Login handleLogin={handleLogin} handleSignup={handleSignup}/>}
-      {userDashboard && <UserDashboard />}
-      {signUpForm && <Signup handleLogin={handleLogin} handleCreateAccount={handleCreateAccount}/>}
+      {isOpenLoginPage && <Login
+        openPage={openPage}
+        accessToken={accessToken}
+        setAccessToken={setAccessToken}
+        client={client}
+        setClient={setClient}
+        expiry={expiry}
+        setExpiry={setExpiry}
+        uid={uid}
+        setUid={setUid}
+      />}
+      {isOpenUserDashboard && <UserDashboard />}
+      {isOpenSignUpPage && <Signup openPage={openPage}/>}
     </div>
   );
 }

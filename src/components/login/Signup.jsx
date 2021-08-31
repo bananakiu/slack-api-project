@@ -38,12 +38,14 @@ const Signup = (props) => {
       }).then((response) => {
         console.log(response);
       }).catch((error) => {
-        console.error(error);
+        console.error(error.response.data.errors);
+        // console.error(error);
       })
-      props.handleCreateAccount();
+      
+      // show relevant pages
+      props.openPage("dashboard");
     }
   }
-
   const handleErrors = (createdUser, errorList) => {
     if (createdUser.password.length < 6) {
       errorList.push("Password must be at least 6 characters long.");
@@ -125,7 +127,7 @@ const Signup = (props) => {
         text-blue-500 hover:text-blue-700
         font-bold text-sm
         cursor-pointer
-        " onClick={props.handleLogin}>
+        " onClick={props.openPage("login")}>
           Already have an account?
         </div>
       </div>      
