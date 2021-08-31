@@ -127,7 +127,7 @@ const Signup = (props) => {
         text-blue-500 hover:text-blue-700
         font-bold text-sm
         cursor-pointer
-        " onClick={props.openPage("login")}>
+        " onClick={() => props.openPage("login")}>
           Already have an account?
         </div>
       </div>      
