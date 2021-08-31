@@ -21,39 +21,46 @@ const Signup = (props) => {
 
     // handle errors
     errorList = handleErrors(createdUser, errorList);
-    setErrors(errorList);
+    
+    // POST to server
+    axios({
+      method: "POST",
+      url: `${API}/api/v1/auth/`,
+      data: createdUser,
+    }).then((response) => {
+      console.log(response); // ! TEMP
 
-    if (errorList.length === 0) {
-      // ! TEMP: alert (turn into nicer alerts)
-      alert("User successfully created!");
+      // set headers
+      props.setAccessToken(response.headers["access-token"]);
+      props.setClient(response.headers.client);
+      props.setExpiry(response.headers.expiry);
+      props.setUid(response.headers.uid);
+    }).catch((error) => {
+      console.error(error.response.data.errors); // ! TEMP
+      errorList.push(...error.response.data.errors.full_messages);
+      setErrors(errorList);
+    }).then(() => {
+      if (errorList.length === 0) {
+        // save user obj
+        setNewUser(createdUser);
 
-      // save user obj
-      setNewUser(createdUser);
+        // show relevant pages
+        props.openPage("dashboard");
 
-      // POST to server
-      axios({
-        method: "POST",
-        url: `${API}/api/v1/auth/`,
-        data: createdUser,
-      }).then((response) => {
-        console.log(response);
-      }).catch((error) => {
-        console.error(error.response.data.errors);
-        // console.error(error);
-      })
-      
-      // show relevant pages
-      props.openPage("dashboard");
-    }
+        // ! TEMP: alert (turn into nicer alerts)
+        alert("User successfully created! You are logged in!");
+      }
+    })
   }
-  const handleErrors = (createdUser, errorList) => {
-    if (createdUser.password.length < 6) {
-      errorList.push("Password must be at least 6 characters long.");
-    }
 
-    if (createdUser.password_confirmation !== createdUser.password) {
-      errorList.push("Password and confirm password do not match.")
-    }
+  const handleErrors = (createdUser, errorList) => {
+    // if (createdUser.password.length < 6) {
+    //   errorList.push("Password must be at least 6 characters long.");
+    // }
+
+    // if (createdUser.password_confirmation !== createdUser.password) {
+    //   errorList.push("Password and confirm password do not match.")
+    // }
 
     return errorList;
   }

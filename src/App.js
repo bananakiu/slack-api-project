@@ -20,7 +20,7 @@ function App() {
     setIsOpenUserDashboard(page==="dashboard" ? true : false);
 }
 
-  return (
+  return <>
     <div>
       {isOpenLoginPage && <Login
         openPage={openPage}
@@ -30,9 +30,15 @@ function App() {
         setUid={setUid}
       />}
       {isOpenUserDashboard && <UserDashboard />}
-      {isOpenSignUpPage && <Signup openPage={openPage}/>}
+      {isOpenSignUpPage && <Signup
+        openPage={openPage}
+        setAccessToken={setAccessToken}
+        setClient={setClient}
+        setExpiry={setExpiry}
+        setUid={setUid}
+      />}
     </div>
-  );
+  </>;
 }
 
 export default App;
