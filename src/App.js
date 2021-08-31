@@ -24,13 +24,9 @@ function App() {
     <div>
       {isOpenLoginPage && <Login
         openPage={openPage}
-        accessToken={accessToken}
         setAccessToken={setAccessToken}
-        client={client}
         setClient={setClient}
-        expiry={expiry}
         setExpiry={setExpiry}
-        uid={uid}
         setUid={setUid}
       />}
       {isOpenUserDashboard && <UserDashboard />}
