@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import ErrorDisplay from "../common/ErrorDisplay";
 
-const Signup = () => {
+const Signup = (props) => {
   const { register, handleSubmit } = useForm();
   const [ newUser, setNewUser ] = useState({});
   const [ errors, setErrors ] = useState([]);
@@ -40,6 +40,7 @@ const Signup = () => {
       }).catch((error) => {
         console.error(error);
       })
+      props.handleCreateAccount();
     }
   }
 
@@ -124,7 +125,7 @@ const Signup = () => {
         text-blue-500 hover:text-blue-700
         font-bold text-sm
         cursor-pointer
-        ">
+        " onClick={props.handleLogin}>
           Already have an account?
         </div>
       </div>      
