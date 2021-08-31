@@ -87,7 +87,7 @@ const Login = (props) => {
                 <button className="bg-purple-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-purple-400">Login</button>
             </div>
             <div className="mt-8">
-                <button className="bg-purple-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-purple-400" onClick={() => props.openPage("signup")}>Signup</button>
+                <button type="button" className="bg-purple-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-purple-400" onClick={() => props.openPage("signup")}>Signup</button>
             </div>
           </div>
         </div>
