@@ -21,32 +21,30 @@ const Login = (props) => {
     // handle errors
     errorList = handleErrors(loggedInUser, errorList);
 
-    if (errorList.length === 0) {
-      // POST to server
-      axios.post(
-        `${API}/api/v1/auth/sign_in`,
-        loggedInUser,
-      ).then((response) => {
-        // save headers
-        props.setAccessToken(response.headers["access-token"]);
-        props.setClient(response.headers.client);
-        props.setExpiry(response.headers.expiry);
-        props.setUid(response.headers.uid);
+    // POST to server
+    axios.post(
+      `${API}/api/v1/auth/sign_in`,
+      loggedInUser,
+    ).then((response) => {
+      // save headers
+      props.setAccessToken(response.headers["access-token"]);
+      props.setClient(response.headers.client);
+      props.setExpiry(response.headers.expiry);
+      props.setUid(response.headers.uid);
 
-      }).catch((error) => {
-        console.error(error.response.data.errors); // ! TEMP
-        errorList.push(...error.response.data.errors);
-        setErrors(errorList);
-      }).then(() => {
-        if (errorList.length === 0) {
-          // save user obj
-          setUser(loggedInUser);
-  
-          // login (change visible components)
-          props.openPage("dashboard");
-        }
-      })
-    }
+    }).catch((error) => {
+      console.error(error.response.data.errors); // ! TEMP
+      errorList.push(...error.response.data.errors);
+      setErrors(errorList);
+    }).then(() => {
+      if (errorList.length === 0) {
+        // save user obj
+        setUser(loggedInUser);
+
+        // login (change visible components)
+        props.openPage("dashboard");
+      }
+    })
   }
 
   const handleErrors = (loggedInUser, errorList) => {
