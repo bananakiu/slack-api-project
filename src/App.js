@@ -9,10 +9,7 @@ function App() {
   const [isOpenLoginPage, setIsOpenLoginPage] = useState(true);
   const [isOpenSignUpPage, setIsOpenSignUpPage] = useState(false);
   const [isOpenUserDashboard, setIsOpenUserDashboard] = useState(false);
-  const [accessToken, setAccessToken] = useState("");
-  const [client, setClient] = useState("");
-  const [expiry, setExpiry] = useState("");
-  const [uid, setUid] = useState("");
+  const [loginHeaders, setLoginHeaders] = useState({});
 
   const openPage = (page) => {
     setIsOpenLoginPage(page==="login" ? true : false);
@@ -24,22 +21,18 @@ function App() {
     <div>
       {isOpenLoginPage && <Login
         openPage={openPage}
-        setAccessToken={setAccessToken}
-        setClient={setClient}
-        setExpiry={setExpiry}
-        setUid={setUid}
+        setLoginHeaders={setLoginHeaders}
       />}
       {isOpenUserDashboard && <UserDashboard />}
       {isOpenSignUpPage && <Signup
         openPage={openPage}
-        setAccessToken={setAccessToken}
-        setClient={setClient}
-        setExpiry={setExpiry}
-        setUid={setUid}
+        setLoginHeaders={setLoginHeaders}
       />}
     </div>
+    <p>
+      {JSON.stringify(loginHeaders)}
+    </p>
   </>;
 }
-
 export default App;
 

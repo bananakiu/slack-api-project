@@ -29,12 +29,9 @@ const Signup = (props) => {
       data: createdUser,
     }).then((response) => {
       console.log(response); // ! TEMP
-
       // set headers
-      props.setAccessToken(response.headers["access-token"]);
-      props.setClient(response.headers.client);
-      props.setExpiry(response.headers.expiry);
-      props.setUid(response.headers.uid);
+      props.setLoginHeaders(response.headers);
+      
     }).catch((error) => {
       console.error(error.response.data.errors); // ! TEMP
       errorList.push(...error.response.data.errors.full_messages);
