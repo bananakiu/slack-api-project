@@ -26,13 +26,8 @@ const Login = (props) => {
       `${API}/api/v1/auth/sign_in`,
       loggedInUser,
     ).then((response) => {
-      console.log(response);
-      console.log(response.data);
-      console.log(response.data.data);
-      
       // save headers
       props.setLoginHeaders(response.headers);
-
     }).catch((error) => {
       console.error(error.response.data.errors); // ! TEMP
       errorList.push(...error.response.data.errors);

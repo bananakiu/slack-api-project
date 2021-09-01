@@ -17,6 +17,7 @@ function App() {
     setIsOpenUserDashboard(page==="dashboard" ? true : false);
 }
 
+
   return <>
     <div>
       {isOpenLoginPage && <Login
