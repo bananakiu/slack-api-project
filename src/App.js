@@ -2,8 +2,8 @@ import Login from "./components/login/Login";
 import Signup from "./components/login/Signup";
 import UserDashboard from "./components/userDashboard/UserDashboard";
 import React, {useState} from "react";
-export const API = "http://206.189.91.54";
 
+export const API = "http://206.189.91.54";
 
 function App() {
   const [isOpenLoginPage, setIsOpenLoginPage] = useState(true);
@@ -23,7 +23,9 @@ function App() {
         openPage={openPage}
         setLoginHeaders={setLoginHeaders}
       />}
-      {isOpenUserDashboard && <UserDashboard />}
+      {isOpenUserDashboard && <UserDashboard
+        loginHeaders={loginHeaders}
+      />}
       {isOpenSignUpPage && <Signup
         openPage={openPage}
         setLoginHeaders={setLoginHeaders}
