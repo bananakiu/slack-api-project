@@ -9,6 +9,7 @@ import CreateNewChannelForm from "./CreateNewChannelForm";
 const UserDashboard = (props) => {
     const [allUsers, setAllUsers] = useState({});
     const [allChannels, setAllChannels] = useState({});
+    const [showCreateChannelForm, setShowCreateChannelForm] = useState(true);
 
     const getAlluserData = () => {
         // GET all users
@@ -52,8 +53,8 @@ const UserDashboard = (props) => {
     }
 
     useEffect(() => {
-        getAllChannels()
-        getAlluserData()
+        getAllChannels();
+        getAlluserData();
     }, [])
 
     return <>
@@ -64,6 +65,12 @@ const UserDashboard = (props) => {
                         <GetAllChannels allChannels={allChannels}/>
                     </div>
                 </div>
+        </div>
+        {/* TEMP */}
+        <div >
+            {showCreateChannelForm && <CreateNewChannelForm
+                setShowModal={setShowCreateChannelForm}
+            />}
         </div>
     </>
 }
