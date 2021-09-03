@@ -3,6 +3,7 @@ import { API } from '../../App'
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import GetAllChannels from "./GetAllChannels";
+import CreateNewChannelForm from "./CreateNewChannelForm";
 
 
 const UserDashboard = (props) => {
@@ -31,10 +32,6 @@ const UserDashboard = (props) => {
         })
     }
 
-    useEffect(() => {
-        getAlluserData()
-    }, [])
-
     const getAllChannels = () => {
         axios({
             method: 'GET',
@@ -56,6 +53,7 @@ const UserDashboard = (props) => {
 
     useEffect(() => {
         getAllChannels()
+        getAlluserData()
     }, [])
 
     return <>
