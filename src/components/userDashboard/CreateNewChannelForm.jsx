@@ -110,13 +110,13 @@ const CreateNewChannelForm = (props) => {
                 ">
                     <label htmlFor="user_ids" className="self-start">Add People</label> 
                     <Select
-                        // {...register("user_ids")}
+                        {...register("user_ids")}
                         options={allUsersOptions}
                         isMulti
                         isSearchable
                         required
                         placeholder="People to add"
-                        className="w-full"
+                        className="w-full text-left"
                         // styles={}
                     />
                 </div>
