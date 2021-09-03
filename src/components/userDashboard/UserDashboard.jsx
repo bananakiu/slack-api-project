@@ -68,8 +68,9 @@ const UserDashboard = (props) => {
         </div>
         {/* TEMP */}
         <div >
-            {showCreateChannelForm && <CreateNewChannelForm
+            {showCreateChannelForm && allUsers.length > 0 && <CreateNewChannelForm
                 setShowModal={setShowCreateChannelForm}
+                allUsers={allUsers}
             />}
         </div>
     </>

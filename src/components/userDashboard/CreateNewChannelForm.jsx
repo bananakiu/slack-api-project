@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import Modal from '../common/Modal';
 import { useForm } from "react-hook-form";
 import ErrorDisplay from '../common/ErrorDisplay';
+import Select from 'react-select';
+
+// TODO: change style of react-select
 
 const CreateNewChannelForm = (props) => {
     const { register, handleSubmit } = useForm();
@@ -47,6 +50,14 @@ const CreateNewChannelForm = (props) => {
         //     }
         // })
     }
+
+    // preprocessing form inputs
+    let allUsersOptions = props.allUsers.map((indivUser) => {
+        return {
+            value: indivUser.id,
+            label: `${indivUser.id} | ${indivUser.uid}`,
+        }
+    })
 
     // render
     return (
@@ -97,12 +108,17 @@ const CreateNewChannelForm = (props) => {
                 mb-4
                 w-full
                 ">
-                    <label htmlFor="user_ids" className="self-start">Add People</label>
-                    <input {...register("user_ids")} type="text" placeholder="Members to Add"
-                    required className="
-                    rounded-md
-                    w-full
-                    "/>
+                    <label htmlFor="user_ids" className="self-start">Add People</label> 
+                    <Select
+                        // {...register("user_ids")}
+                        options={allUsersOptions}
+                        isMulti
+                        isSearchable
+                        required
+                        placeholder="People to add"
+                        className="w-full"
+                        // styles={}
+                    />
                 </div>
                 <div className="
                 flex justify-end items-center
