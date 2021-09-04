@@ -19,7 +19,8 @@ const CreateNewChannelForm = (props) => {
         // create channel obj
         let createdChannel = {
             name: data.name,
-            user_ids: data.user_ids.map(option => option.value),
+            // user_ids: data.user_ids.map(option => option.value),
+            user_ids: [props.loginUser.id, ...data.user_ids.map(option => option.value)],
         }
         
         // POST to server
@@ -65,6 +66,8 @@ const CreateNewChannelForm = (props) => {
             label: `${indivUser.id} | ${indivUser.uid}`,
         }
     })
+
+    allUsersOptions = allUsersOptions.filter((indivUser) => indivUser.value !== props.loginUser.id);
 
     // render
     return (

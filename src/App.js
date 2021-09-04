@@ -29,6 +29,7 @@ function App() {
       />}
       {isOpenUserDashboard && <UserDashboard
         loginHeaders={loginHeaders}
+        loginUser={loginUser}
         setLoginUser={setLoginUser}
       />}
       {isOpenSignUpPage && <Signup
@@ -40,6 +41,7 @@ function App() {
     </div>
     <p>
       {JSON.stringify(loginHeaders)}
+      {JSON.stringify(loginUser)}
     </p>
   </>
 };
