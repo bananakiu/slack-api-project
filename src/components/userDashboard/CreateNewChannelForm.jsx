@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import Modal from '../common/Modal';
-import { useForm } from "react-hook-form";
 import ErrorDisplay from '../common/ErrorDisplay';
+import { useForm, Controller } from 'react-hook-form';
 import Select from 'react-select';
+import axios from "axios";
+import { API } from '../../App';
 
-// TODO: change style of react-select
+// TODO: change style of react-select selector
+// TODO: automatically include user creating channel in list of included users
 
 const CreateNewChannelForm = (props) => {
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, control } = useForm();
     const [ errors, setErrors ] = useState([]);
 
     const onSubmit = (data) => {
@@ -16,39 +19,43 @@ const CreateNewChannelForm = (props) => {
         // create channel obj
         let createdChannel = {
             name: data.name,
-            user_ids: data.user_ids,
+            user_ids: data.user_ids.map(option => option.value),
         }
         
-        // // POST to server
-        // axios({
-        //     method: "POST",
-        //     url: `${API}/api/v1/channels`,
-        //     data: createdChannel,
-        //     headers: {
-        //         "access-token": props.loginHeaders["access-token"],
-        //         client: props.loginHeaders.client,
-        //         expiry: props.loginHeaders.expiry,
-        //         uid: props.loginHeaders.uid,
-        //     },
-        // }).then((response) => {
-        //     console.log("response");
-        // }).catch((error) => {
-        //     console.error(error.response.data.errors); // ! TEMP
-        //     errorList.push(...error.response.data.errors);
-        //     setErrors(errorList);
-        // }).then(() => {
-        //     if (errorList.length === 0) {
-        //         // ! TEMP: alert (turn into nicer alerts)
-        //         alert("Channel created!");
+        // POST to server
+        axios({
+            method: "POST",
+            url: `${API}/api/v1/channels`,
+            data: createdChannel,
+            headers: {
+                "access-token": props.loginHeaders["access-token"],
+                client: props.loginHeaders.client,
+                expiry: props.loginHeaders.expiry,
+                uid: props.loginHeaders.uid,
+            },
+        }).then((response) => {
+             // ! TEMP: while the API doesn't work the way it should,
+            if (response.data?.errors && response.data.errors.length > 0) {
+                errorList.push(...response.data.errors);
+                setErrors(errorList);
+            }
+        }).catch((error) => {
+            console.error(error.response.data.errors); // ! TEMP
+            errorList.push(...error.response.data.errors);
+            setErrors(errorList);
+        }).then(() => {
+            if (errorList.length === 0) {
+                // ! TEMP: alert (turn into nicer alerts)
+                alert("Channel created!");
 
-        //         // trigger updating channels in app
+                // trigger updating channels in app
 
-        //         // empty form fields
+                // empty form fields
         
-        //         // close modal
-        //         props.setShowModal(false);
-        //     }
-        // })
+                // close modal
+                props.setShowModal(false);
+            }
+        })
     }
 
     // preprocessing form inputs
@@ -109,15 +116,22 @@ const CreateNewChannelForm = (props) => {
                 w-full
                 ">
                     <label htmlFor="user_ids" className="self-start">Add People</label> 
-                    <Select
-                        {...register("user_ids")}
-                        options={allUsersOptions}
-                        isMulti
-                        isSearchable
-                        required
-                        placeholder="People to add"
-                        className="w-full text-left"
-                        // styles={}
+                    <Controller
+                        name="user_ids"
+                        isClearable
+                        control={control}
+                        render={({ field }) => (
+                            <Select
+                                {...field}
+                                options={allUsersOptions}
+                                isMulti
+                                isSearchable
+                                required
+                                placeholder="People to add"
+                                className="w-full text-left"
+                                // styles={}
+                            />
+                        )}
                     />
                 </div>
                 <div className="

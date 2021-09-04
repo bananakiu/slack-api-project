@@ -44,7 +44,7 @@ const UserDashboard = (props) => {
                 uid: props.loginHeaders.uid,
             },
         }).then((response) => {
-            console.log(response.data.data) // ! TEMP
+            // console.log(response.data.data) // ! TEMP
             const allAvailableChannels = (response.data.data);
             setAllChannels(allAvailableChannels);
         }).catch((error) => {
@@ -71,6 +71,7 @@ const UserDashboard = (props) => {
             {showCreateChannelForm && allUsers.length > 0 && <CreateNewChannelForm
                 setShowModal={setShowCreateChannelForm}
                 allUsers={allUsers}
+                loginHeaders={props.loginHeaders}
             />}
         </div>
     </>
