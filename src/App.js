@@ -39,10 +39,6 @@ function App() {
       />}
 
     </div>
-    <p>
-      {JSON.stringify(loginHeaders)}
-      {JSON.stringify(loginUser)}
-    </p>
   </>
 };
 
