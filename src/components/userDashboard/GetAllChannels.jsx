@@ -6,10 +6,10 @@ export default function GetAllChannels(props) {
     
         if (allChannels !== undefined && allChannels.length > 0) {
             return (
-                allChannels.map((allChannels, index) => {
+                allChannels.map((channel, index) => {
                     // console.log(allChannels);
                     return(
-                        <div>{allChannels.name}</div>
+                        <div key={index}>{channel.name}</div>
                     )
                 })
             )
