@@ -7,7 +7,7 @@ export default function GetAllChannels(props) {
         if (allChannels !== undefined && allChannels.length > 0) {
             return (
                 allChannels.map((allChannels, index) => {
-                    console.log(allChannels);
+                    // console.log(allChannels);
                     return(
                         <div>{allChannels.name}</div>
                     )
