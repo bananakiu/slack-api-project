@@ -72,6 +72,7 @@ const UserDashboard = (props) => {
                 setShowModal={setShowCreateChannelForm}
                 allUsers={allUsers}
                 loginHeaders={props.loginHeaders}
+                loggedInUser={props.loggedInUser}
             />}
         </div>
     </>

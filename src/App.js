@@ -11,7 +11,7 @@ function App() {
   const [isOpenSignUpPage, setIsOpenSignUpPage] = useState(false);
   const [isOpenUserDashboard, setIsOpenUserDashboard] = useState(false);
   const [loginHeaders, setLoginHeaders] = useState({});
-  const [isOpenModal, setIsOpenModal] = useState(true);
+  const [loginUser, setLoginUser] = useState({});
 
   const openPage = (page) => {
     setIsOpenLoginPage(page==="login" ? true : false);
@@ -25,33 +25,17 @@ function App() {
       {isOpenLoginPage && <Login
         openPage={openPage}
         setLoginHeaders={setLoginHeaders}
+        setLoginUser={setLoginUser}
       />}
       {isOpenUserDashboard && <UserDashboard
         loginHeaders={loginHeaders}
+        setLoginUser={setLoginUser}
       />}
       {isOpenSignUpPage && <Signup
         openPage={openPage}
         setLoginHeaders={setLoginHeaders}
+        setLoginUser={setLoginUser}
       />}
-
-      {/* MODAL EXAMPLE */}
-      {/* {isOpenModal && <Modal
-        setIsOpenModal={setIsOpenModal}
-        // closeModalFunction={() => {console.log("modal closed")}}
-      >
-        <div className="
-        py-4 px-6
-        border-gray-150 border-2 rounded-lg
-        transition duration-200
-        flex flex-col justify-center
-        bg-white
-        w-96
-        ">
-          <p>mikyle</p>
-          <p>ivan</p>
-          <p>leandre</p>
-        </div>
-      </Modal>} */}
 
     </div>
     <p>

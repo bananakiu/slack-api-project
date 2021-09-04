@@ -6,7 +6,6 @@ import ErrorDisplay from "../common/ErrorDisplay";
 
 const Login = (props) => {
   const { register, handleSubmit } = useForm();
-  const [ user, setUser ] = useState({});
   const [ errors, setErrors ] = useState([]);
 
   const onSubmit = (data) => {
@@ -27,16 +26,14 @@ const Login = (props) => {
       loggedInUser,
     ).then((response) => {
       // save headers
+      props.setLoginUser(response.data.data);
       props.setLoginHeaders(response.headers);
     }).catch((error) => {
-      console.error(error.response.data.errors); // ! TEMP
+      // console.error(error.response.data.errors); // ! TEMP
       errorList.push(...error.response.data.errors);
       setErrors(errorList);
     }).then(() => {
       if (errorList.length === 0) {
-        // save user obj
-        setUser(loggedInUser);
-
         // login (change visible components)
         props.openPage("dashboard");
       }
