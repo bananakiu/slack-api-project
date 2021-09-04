@@ -60,16 +60,6 @@ const UserDashboard = (props) => {
         getAlluserData();
     }, [])
 
-<<<<<<< HEAD
-    return <>
-        <div className="py-6">
-                <div className="flex bg-gray-100 rounded-lg shadow-lg overflow-hidden mx-auto max-w-sm lg:max-w-2xl">
-                    <div className="w-full p-8 lg:w-1/2">
-                        <h2 className="text-2xl font-semibold text-gray-700 text-center">Test component for User Dashboard</h2>
-                        <GetAllChannels allChannels={allChannels}/>
-                    </div>
-                </div>
-=======
   return (
     <>
       <div className='py-6'>
@@ -80,7 +70,6 @@ const UserDashboard = (props) => {
             </h2>
             <GetAllChannels allChannels={allChannels} />
           </div>
->>>>>>> 4b2bc480906ee9d893b35775c777fa36aff437cf
         </div>
       </div>
       <Chat />
