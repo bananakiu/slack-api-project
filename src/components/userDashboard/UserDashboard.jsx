@@ -3,12 +3,13 @@ import { API } from '../../App';
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import GetAllChannels from './GetAllChannels';
-// import CreateNewChannelForm from './CreateNewChannelForm';
+import CreateNewChannelForm from './CreateNewChannelForm';
 import Chat from './Chat';
 
 const UserDashboard = (props) => {
-  const [allUsers, setAllUsers] = useState({});
-  const [allChannels, setAllChannels] = useState({});
+    const [allUsers, setAllUsers] = useState({});
+    const [allChannels, setAllChannels] = useState({});
+    const [showCreateChannelForm, setShowCreateChannelForm] = useState(true);
 
   const getAlluserData = () => {
     // GET all users
@@ -35,31 +36,29 @@ const UserDashboard = (props) => {
       });
   };
 
-  const getAllChannels = () => {
-    axios({
-      method: 'GET',
-      url: `${API}/api/v1/channels`,
-      headers: {
-        'access-token': props.loginHeaders['access-token'],
-        client: props.loginHeaders.client,
-        expiry: props.loginHeaders.expiry,
-        uid: props.loginHeaders.uid,
-      },
-    })
-      .then((response) => {
-        console.log(response.data.data); // ! TEMP
-        const allAvailableChannels = response.data.data;
-        setAllChannels(allAvailableChannels);
-      })
-      .catch((error) => {
-        console.error(error.response.data.errors);
-      });
-  };
+    const getAllChannels = () => {
+        axios({
+            method: 'GET',
+            url: `${API}/api/v1/channels`,
+            headers: {
+                "access-token": props.loginHeaders["access-token"],
+                client: props.loginHeaders.client,
+                expiry: props.loginHeaders.expiry,
+                uid: props.loginHeaders.uid,
+            },
+        }).then((response) => {
+            // console.log(response.data.data) // ! TEMP
+            const allAvailableChannels = (response.data.data);
+            setAllChannels(allAvailableChannels);
+        }).catch((error) => {
+            console.error(error.response.data.errors);
+        })
+    }
 
-  useEffect(() => {
-    getAllChannels();
-    getAlluserData();
-  }, []);
+    useEffect(() => {
+        getAllChannels();
+        getAlluserData();
+    }, [])
 
   return (
     <>
@@ -74,6 +73,15 @@ const UserDashboard = (props) => {
         </div>
       </div>
       <Chat />
+        {/* TEMP */}
+        <div >
+            {showCreateChannelForm && allUsers.length > 0 && <CreateNewChannelForm
+                setShowModal={setShowCreateChannelForm}
+                allUsers={allUsers}
+                loginHeaders={props.loginHeaders}
+                loginUser={props.loginUser}
+            />}
+        </div>
     </>
   );
 };

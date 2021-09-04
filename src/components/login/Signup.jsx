@@ -6,8 +6,7 @@ import ErrorDisplay from '../common/ErrorDisplay';
 
 const Signup = (props) => {
   const { register, handleSubmit } = useForm();
-  const [newUser, setNewUser] = useState({});
-  const [errors, setErrors] = useState([]);
+  const [ errors, setErrors ] = useState([]);
 
   const onSubmit = (data) => {
     let errorList = [];
@@ -27,24 +26,19 @@ const Signup = (props) => {
       method: 'POST',
       url: `${API}/api/v1/auth/`,
       data: createdUser,
-    })
-      .then((response) => {
-        console.log(response); // ! TEMP
-        // set headers
-        props.setLoginHeaders(response.headers);
-      })
-      .catch((error) => {
-        console.error(error.response.data.errors); // ! TEMP
-        errorList.push(...error.response.data.errors.full_messages);
-        setErrors(errorList);
-      })
-      .then(() => {
-        if (errorList.length === 0) {
-          // save user obj
-          setNewUser(createdUser);
-
-          // show relevant pages
-          props.openPage('dashboard');
+    }).then((response) => {
+      console.log(response); // ! TEMP
+      // set headers
+      props.setLoginUser(response.data.data)
+      props.setLoginHeaders(response.headers);
+    }).catch((error) => {
+      // console.error(error.response.data.errors); // ! TEMP
+      errorList.push(...error.response.data.errors.full_messages);
+      setErrors(errorList);
+    }).then(() => {
+      if (errorList.length === 0) {
+        // show relevant pages
+        props.openPage("dashboard");
 
           // ! TEMP: alert (turn into nicer alerts)
           alert('User successfully created! You are logged in!');
@@ -64,8 +58,7 @@ const Signup = (props) => {
     return errorList;
   };
 
-  return (
-    <>
+  return <>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className='
@@ -179,10 +172,8 @@ const Signup = (props) => {
             Already have an account?
           </div>
         </div>
-      </form>
-      <p>{JSON.stringify(newUser)}</p> {/* TEMP */}
-    </>
-  );
+    </form>
+  </>
 };
 
 export default Signup;

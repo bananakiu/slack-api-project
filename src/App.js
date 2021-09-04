@@ -11,47 +11,39 @@ function App() {
   const [isOpenSignUpPage, setIsOpenSignUpPage] = useState(false);
   const [isOpenUserDashboard, setIsOpenUserDashboard] = useState(false);
   const [loginHeaders, setLoginHeaders] = useState({});
-  const [isOpenModal, setIsOpenModal] = useState(true);
+  const [loginUser, setLoginUser] = useState({});
 
   const openPage = (page) => {
-    setIsOpenLoginPage(page === 'login' ? true : false);
-    setIsOpenSignUpPage(page === 'signup' ? true : false);
-    setIsOpenUserDashboard(page === 'dashboard' ? true : false);
-  };
+    setIsOpenLoginPage(page==="login" ? true : false);
+    setIsOpenSignUpPage(page==="signup" ? true : false);
+    setIsOpenUserDashboard(page==="dashboard" ? true : false);
+  }
 
-  return (
-    <>
-      <div>
-        {isOpenLoginPage && (
-          <Login openPage={openPage} setLoginHeaders={setLoginHeaders} />
-        )}
-        {isOpenUserDashboard && <UserDashboard loginHeaders={loginHeaders} />}
-        {isOpenSignUpPage && (
-          <Signup openPage={openPage} setLoginHeaders={setLoginHeaders} />
-        )}
 
-        {/* MODAL EXAMPLE */}
-        {/* {isOpenModal && <Modal
-        setIsOpenModal={setIsOpenModal}
-        // closeModalFunction={() => {console.log("modal closed")}}
-      >
-        <div className="
-        py-4 px-6
-        border-gray-150 border-2 rounded-lg
-        transition duration-200
-        flex flex-col justify-center
-        bg-white
-        w-96
-        ">
-          <p>mikyle</p>
-          <p>ivan</p>
-          <p>leandre</p>
-        </div>
-      </Modal>} */}
-      </div>
-      <p>{JSON.stringify(loginHeaders)}</p>
-    </>
-  );
-}
+  return <>
+    <div>
+      {isOpenLoginPage && <Login
+        openPage={openPage}
+        setLoginHeaders={setLoginHeaders}
+        setLoginUser={setLoginUser}
+      />}
+      {isOpenUserDashboard && <UserDashboard
+        loginHeaders={loginHeaders}
+        loginUser={loginUser}
+        setLoginUser={setLoginUser}
+      />}
+      {isOpenSignUpPage && <Signup
+        openPage={openPage}
+        setLoginHeaders={setLoginHeaders}
+        setLoginUser={setLoginUser}
+      />}
+
+    </div>
+    <p>
+      {JSON.stringify(loginHeaders)}
+      {JSON.stringify(loginUser)}
+    </p>
+  </>
+};
 
 export default App;

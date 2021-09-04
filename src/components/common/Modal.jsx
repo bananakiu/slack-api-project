@@ -1,4 +1,4 @@
-import React, { useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types';
 
 function Modal(props) {
@@ -22,7 +22,7 @@ function Modal(props) {
         }
 
         // close modal
-        props.setIsOpenModal(false);
+        props.setShowModal(false);
     }
 
     // close model when background is clicked
@@ -39,9 +39,9 @@ function Modal(props) {
         flex justify-center items-center text-center
         bg-black bg-opacity-50
         `}>
-            <div tabIndex="-1">
-                {props.children}
-            </div>
+            {/* <div tabIndex="-1"> */}
+            {props.children}
+            {/* </div> */}
         </div>
     </>
 }
@@ -49,7 +49,7 @@ function Modal(props) {
 // TODO: currently doesn't work. Will fix this in future versions
 Modal.propTypes = {
     closeModalFunction: PropTypes.func,
-    setIsOpenModal: PropTypes.func.isRequired,
+    setShowModal: PropTypes.func.isRequired,
 };
 
 export default Modal
