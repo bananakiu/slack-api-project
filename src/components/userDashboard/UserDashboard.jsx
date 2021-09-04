@@ -62,26 +62,37 @@ const UserDashboard = (props) => {
 
   return (
     <>
-      <div className='py-6'>
-        <div className='flex bg-white rounded-lg shadow-lg overflow-hidden mx-auto max-w-sm lg:max-w-2xl'>
-          <div className='w-full p-8 lg:w-1/2'>
-            <h2 className='text-2xl font-semibold text-gray-700 text-center'>
-              Test component for User Dashboard
-            </h2>
-            <GetAllChannels allChannels={allChannels} />
-          </div>
+      {/* background */}
+      <div className='
+      py-6 bg-red-300
+      flex items-center justify-center
+      w-full h-screen
+      border-box
+      '>
+        {/* card */}
+        <div
+        className='
+        flex justify-center
+        bg-white rounded-lg shadow-lg
+        py-4 px-6 my-4 mx-6
+        w-4/5 h-4/5 
+        '>
+          <GetAllChannels allChannels={allChannels} />
+          <Chat />
         </div>
       </div>
-      <Chat />
-        {/* TEMP */}
-        <div >
-            {showCreateChannelForm && allUsers.length > 0 && <CreateNewChannelForm
-                setShowModal={setShowCreateChannelForm}
-                allUsers={allUsers}
-                loginHeaders={props.loginHeaders}
-                loginUser={props.loginUser}
-            />}
-        </div>
+
+      
+
+      {/* Modals */}
+      <div >
+          {showCreateChannelForm && allUsers.length > 0 && <CreateNewChannelForm
+              setShowModal={setShowCreateChannelForm}
+              allUsers={allUsers}
+              loginHeaders={props.loginHeaders}
+              loginUser={props.loginUser}
+          />}
+      </div>
     </>
   );
 };

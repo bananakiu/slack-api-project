@@ -3,7 +3,12 @@ import React from 'react';
 const Chat = () => {
   return (
     // Chat container
-    <div className='flex-col flex-grow mx-10'>
+    <div className='
+    flex-col flex-grow
+    ml-6
+    rounded-2xl shadow-inner
+    bg-gray-50  
+    '>
       <>
         <div className='flex justify-between p-5 border-b-2 border-lightgray-600'>
           <div>

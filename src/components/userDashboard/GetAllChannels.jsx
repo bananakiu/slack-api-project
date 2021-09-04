@@ -9,7 +9,9 @@ export default function GetAllChannels(props) {
                 allChannels.map((channel, index) => {
                     // console.log(allChannels);
                     return(
-                        <div className="flex justify-between align-center m-1 py-2 px-3 border-gray-200 border-2 rounded-lg
+                        <div className="
+                        flex justify-between align-center m-1 py-2 px-3
+                        border-gray-200 border-2 rounded-lg
                         hover:shadow-md
                         transition duration-200
                         flex-shrink" key={index}>{channel.name}</div>
@@ -22,7 +24,7 @@ export default function GetAllChannels(props) {
     }
         return (
             <>
-                <div className="flex flex-col w-56 bg-white rounded-3xl overflow-hidden">
+                <div className="flex flex-col w-56 bg-white rounded-2xl overflow-hidden">
                     <h1 className="text-3xl uppercase text-red-500">Channels</h1>
                     <ul className="flex flex-col py-4 ">
                         {displayAllAvailableChannels(props)}
