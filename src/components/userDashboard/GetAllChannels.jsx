@@ -22,12 +22,12 @@ export default function GetAllChannels(props) {
     }
         return (
             <>
-              <div className="flex flex-col w-56 bg-white rounded-3xl overflow-hidden">
-                <h1 className="text-3xl uppercase text-red-500">Channels</h1>
-                <ul className="flex flex-col py-4 ">
-                    {displayAllAvailableChannels(props)}
-                </ul>
-            </div>
+                <div className="flex flex-col w-56 bg-white rounded-3xl overflow-hidden">
+                    <h1 className="text-3xl uppercase text-red-500">Channels</h1>
+                    <ul className="flex flex-col py-4 ">
+                        {displayAllAvailableChannels(props)}
+                    </ul>
+                </div>
             </>
         )
     }
