@@ -7,7 +7,6 @@ import axios from "axios";
 import { API } from '../../App';
 
 // TODO: change style of react-select selector
-// TODO: automatically include user creating channel in list of included users
 
 const CreateNewChannelForm = (props) => {
     const { register, handleSubmit, control } = useForm();
