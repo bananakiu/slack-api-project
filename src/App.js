@@ -1,10 +1,10 @@
-import Login from "./components/login/Login";
-import Signup from "./components/login/Signup";
-import UserDashboard from "./components/userDashboard/UserDashboard";
-import React, {useState} from "react";
-import Modal from "./components/common/Modal";
+import Login from './components/login/Login';
+import Signup from './components/login/Signup';
+import UserDashboard from './components/userDashboard/UserDashboard';
+import React, { useState } from 'react';
+import Modal from './components/common/Modal';
 
-export const API = "http://206.189.91.54";
+export const API = 'http://206.189.91.54';
 
 function App() {
   const [isOpenLoginPage, setIsOpenLoginPage] = useState(true);
@@ -14,28 +14,24 @@ function App() {
   const [isOpenModal, setIsOpenModal] = useState(true);
 
   const openPage = (page) => {
-    setIsOpenLoginPage(page==="login" ? true : false);
-    setIsOpenSignUpPage(page==="signup" ? true : false);
-    setIsOpenUserDashboard(page==="dashboard" ? true : false);
-  }
+    setIsOpenLoginPage(page === 'login' ? true : false);
+    setIsOpenSignUpPage(page === 'signup' ? true : false);
+    setIsOpenUserDashboard(page === 'dashboard' ? true : false);
+  };
 
+  return (
+    <>
+      <div>
+        {isOpenLoginPage && (
+          <Login openPage={openPage} setLoginHeaders={setLoginHeaders} />
+        )}
+        {isOpenUserDashboard && <UserDashboard loginHeaders={loginHeaders} />}
+        {isOpenSignUpPage && (
+          <Signup openPage={openPage} setLoginHeaders={setLoginHeaders} />
+        )}
 
-  return <>
-    <div>
-      {isOpenLoginPage && <Login
-        openPage={openPage}
-        setLoginHeaders={setLoginHeaders}
-      />}
-      {isOpenUserDashboard && <UserDashboard
-        loginHeaders={loginHeaders}
-      />}
-      {isOpenSignUpPage && <Signup
-        openPage={openPage}
-        setLoginHeaders={setLoginHeaders}
-      />}
-
-      {/* MODAL EXAMPLE */}
-      {/* {isOpenModal && <Modal
+        {/* MODAL EXAMPLE */}
+        {/* {isOpenModal && <Modal
         setIsOpenModal={setIsOpenModal}
         // closeModalFunction={() => {console.log("modal closed")}}
       >
@@ -52,12 +48,10 @@ function App() {
           <p>leandre</p>
         </div>
       </Modal>} */}
-
-    </div>
-    <p>
-      {JSON.stringify(loginHeaders)}
-    </p>
-  </>
-};
+      </div>
+      <p>{JSON.stringify(loginHeaders)}</p>
+    </>
+  );
+}
 
 export default App;
