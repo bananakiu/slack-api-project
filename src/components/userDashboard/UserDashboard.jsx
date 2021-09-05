@@ -1,10 +1,11 @@
 import axios from 'axios';
 import { API } from '../../App';
 import { useState, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+// import { useForm } from 'react-hook-form';
 import GetAllChannels from './GetAllChannels';
 import CreateNewChannelForm from './CreateNewChannelForm';
 import Chat from './Chat';
+import UserProfile from './UserProfile';
 
 const UserDashboard = (props) => {
     const [allUsers, setAllUsers] = useState({});
@@ -27,6 +28,7 @@ const UserDashboard = (props) => {
       .then((response) => {
         // console.log(response.data.data) // ! TEMP
         setAllUsers(response.data.data);
+        
       })
       .catch((error) => {
         console.error(error.response.data.errors); // ! TEMP
@@ -47,7 +49,6 @@ const UserDashboard = (props) => {
                 uid: props.loginHeaders.uid,
             },
         }).then((response) => {
-            // console.log(response.data.data) // ! TEMP
             const allAvailableChannels = (response.data.data);
             setAllChannels(allAvailableChannels);
         }).catch((error) => {
@@ -77,7 +78,14 @@ const UserDashboard = (props) => {
         py-4 px-6 my-4 mx-6
         w-4/5 h-4/5 
         '>
-          <GetAllChannels allChannels={allChannels} />
+          <div className="
+          // flex flex-col
+        bg-white rounded-lg shadow-lg
+        py-4 px-6 my-4 mx-6
+        ">
+            <UserProfile loginUser={props.loginUser} />
+            <GetAllChannels allChannels={allChannels} />
+          </div>
           <Chat />
         </div>
       </div>
