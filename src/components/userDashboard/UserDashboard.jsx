@@ -75,17 +75,19 @@ const UserDashboard = (props) => {
         className='
         flex justify-center
         bg-white rounded-lg shadow-lg
-        py-4 px-6 my-4 mx-6
+        py-6 px-6
         w-4/5 h-4/5 
         '>
+          {/* sidebar */}
           <div className="
-          // flex flex-col
-        bg-white rounded-lg shadow-lg
-        py-4 px-6 my-4 mx-6
-        ">
+          flex flex-col
+          bg-white rounded-lg shadow-lg
+          py-4 px-6
+          ">
             <UserProfile loginUser={props.loginUser} />
             <GetAllChannels allChannels={allChannels} />
           </div>
+          {/* chat box */}
           <Chat />
         </div>
       </div>
