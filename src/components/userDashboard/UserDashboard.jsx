@@ -9,7 +9,6 @@ import UserProfile from './UserProfile';
 
 const UserDashboard = () => {
   const {
-    loginUser,
     loginHeaders,
     allUsers,
     setAllUsers,
