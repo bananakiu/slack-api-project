@@ -1,12 +1,19 @@
 import axios from 'axios';
 import { API } from '../../App';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import ErrorDisplay from '../common/ErrorDisplay';
+import { StatesContext } from '../../App';
 
-const Signup = (props) => {
+const Signup = () => {
   const { register, handleSubmit } = useForm();
   const [ errors, setErrors ] = useState([]);
+
+  const { 
+    setLoginUser,
+    setLoginHeaders,
+    openPage
+  } = useContext(StatesContext);
 
   const onSubmit = (data) => {
     let errorList = [];
@@ -27,10 +34,10 @@ const Signup = (props) => {
       url: `${API}/api/v1/auth/`,
       data: createdUser,
     }).then((response) => {
-      console.log(response); // ! TEMP
+      // console.log(response); // ! TEMP
       // set headers
-      props.setLoginUser(response.data.data)
-      props.setLoginHeaders(response.headers);
+      setLoginUser(response.data.data)
+      setLoginHeaders(response.headers);
     }).catch((error) => {
       // console.error(error.response.data.errors); // ! TEMP
       errorList.push(...error.response.data.errors.full_messages);
@@ -38,12 +45,12 @@ const Signup = (props) => {
     }).then(() => {
       if (errorList.length === 0) {
         // show relevant pages
-        props.openPage("dashboard");
+        openPage("dashboard");
 
-          // ! TEMP: alert (turn into nicer alerts)
-          alert('User successfully created! You are logged in!');
-        }
-      });
+        // ! TEMP: alert (turn into nicer alerts)
+        alert('User successfully created! You are logged in!');
+      }
+    });
   };
 
   const handleErrors = (createdUser, errorList) => {
@@ -167,7 +174,7 @@ const Signup = (props) => {
         font-bold text-sm
         cursor-pointer
         '
-            onClick={() => props.openPage('login')}
+            onClick={() => openPage('login')}
           >
             Already have an account?
           </div>
