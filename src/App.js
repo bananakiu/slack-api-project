@@ -2,7 +2,6 @@ import Login from './components/login/Login';
 import Signup from './components/login/Signup';
 import UserDashboard from './components/userDashboard/UserDashboard';
 import React, { useState } from 'react';
-import Modal from './components/common/Modal';
 
 export const API = 'http://206.189.91.54';
 
