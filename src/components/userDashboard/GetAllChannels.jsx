@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { StatesContext } from '../../App';
 
-export default function GetAllChannels(props) {
+const GetAllChannels = () => {
+    const { allChannels } = useContext(StatesContext);
+
     const displayAllAvailableChannels = (allChannels) => {    
         if (allChannels !== undefined && allChannels.length > 0) {
             return (
@@ -25,7 +28,7 @@ export default function GetAllChannels(props) {
                 <div className="flex flex-col w-56 bg-white rounded-2xl overflow-hidden">
                     <h1 className="text-3xl uppercase text-red-500">Channels</h1>
                     <ul className="flex flex-col py-4 ">
-                        {displayAllAvailableChannels(props.allChannels)}
+                        {displayAllAvailableChannels(allChannels)}
                     </ul>
                 </div>
             </>
@@ -33,4 +36,4 @@ export default function GetAllChannels(props) {
     }
 
 
-// export default GetAllChannels(props);
+export default GetAllChannels;

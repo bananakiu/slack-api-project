@@ -1,12 +1,19 @@
 import axios from "axios";
 import { API } from '../../App'
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useForm } from "react-hook-form";
 import ErrorDisplay from "../common/ErrorDisplay";
+import { StatesContext } from "../../App";
 
-const Login = (props) => {
+const Login = () => {
   const { register, handleSubmit } = useForm();
   const [ errors, setErrors ] = useState([]);
+
+  const { 
+    setLoginUser,
+    setLoginHeaders,
+    openPage
+  } = useContext(StatesContext);
 
   const onSubmit = (data) => {
     let errorList = [];
@@ -26,8 +33,8 @@ const Login = (props) => {
       loggedInUser,
     ).then((response) => {
       // save headers
-      props.setLoginUser(response.data.data);
-      props.setLoginHeaders(response.headers);
+      setLoginUser(response.data.data);
+      setLoginHeaders(response.headers);
     }).catch((error) => {
       // console.error(error.response.data.errors); // ! TEMP
       errorList.push(...error.response.data.errors);
@@ -35,7 +42,7 @@ const Login = (props) => {
     }).then(() => {
       if (errorList.length === 0) {
         // login (change visible components)
-        props.openPage("dashboard");
+        openPage("dashboard");
       }
     })
   }
@@ -78,7 +85,7 @@ const Login = (props) => {
               <button className="bg-purple-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-purple-400">Login</button>
             </div>
             <div className="mt-8">
-                <button type="button" className="bg-purple-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-purple-400" onClick={() => props.openPage("signup")}>Signup</button>
+                <button type="button" className="bg-purple-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-purple-400" onClick={() => openPage("signup")}>Signup</button>
             </div>
           </div>
         </div>
