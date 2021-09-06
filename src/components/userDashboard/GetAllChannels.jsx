@@ -1,9 +1,7 @@
 import React from 'react';
 
 export default function GetAllChannels(props) {
-    const displayAllAvailableChannels = (props) => {
-        const {channels, allChannels} = props;
-    
+    const displayAllAvailableChannels = (allChannels) => {    
         if (allChannels !== undefined && allChannels.length > 0) {
             return (
                 allChannels.map((channel, index) => {
@@ -27,7 +25,7 @@ export default function GetAllChannels(props) {
                 <div className="flex flex-col w-56 bg-white rounded-2xl overflow-hidden">
                     <h1 className="text-3xl uppercase text-red-500">Channels</h1>
                     <ul className="flex flex-col py-4 ">
-                        {displayAllAvailableChannels(props)}
+                        {displayAllAvailableChannels(props.allChannels)}
                     </ul>
                 </div>
             </>
