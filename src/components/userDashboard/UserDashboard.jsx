@@ -1,16 +1,22 @@
 import axios from 'axios';
-import { API } from '../../App';
-import { useState, useEffect } from 'react';
-// import { useForm } from 'react-hook-form';
+import { API, StatesContext } from '../../App';
+import { useState, useEffect, useContext } from 'react';
 import GetAllChannels from './GetAllChannels';
 import CreateNewChannelForm from './CreateNewChannelForm';
 import Chat from './Chat';
 import UserProfile from './UserProfile';
 
-const UserDashboard = (props) => {
-    const [allUsers, setAllUsers] = useState({});
-    const [allChannels, setAllChannels] = useState({});
-    const [showCreateChannelForm, setShowCreateChannelForm] = useState(false);
+
+const UserDashboard = () => {
+  const {
+    loginUser,
+    loginHeaders,
+    allUsers,
+    setAllUsers,
+    allChannels,
+    setAllChannels,
+    showCreateChannelForm,
+  } = useContext(StatesContext);
 
   const getAlluserData = () => {
     // GET all users
@@ -18,11 +24,11 @@ const UserDashboard = (props) => {
       method: 'GET',
       url: `${API}/api/v1/users`,
       headers: {
-        'access-token': props.loginHeaders['access-token'],
-        client: props.loginHeaders.client,
+        'access-token': loginHeaders['access-token'],
+        client: loginHeaders.client,
         // client: "mikyle",
-        expiry: props.loginHeaders.expiry,
-        uid: props.loginHeaders.uid,
+        expiry: loginHeaders.expiry,
+        uid: loginHeaders.uid,
       },
     })
       .then((response) => {
@@ -43,10 +49,10 @@ const UserDashboard = (props) => {
             method: 'GET',
             url: `${API}/api/v1/channels`,
             headers: {
-                "access-token": props.loginHeaders["access-token"],
-                client: props.loginHeaders.client,
-                expiry: props.loginHeaders.expiry,
-                uid: props.loginHeaders.uid,
+                "access-token": loginHeaders["access-token"],
+                client: loginHeaders.client,
+                expiry: loginHeaders.expiry,
+                uid: loginHeaders.uid,
             },
         }).then((response) => {
             const allAvailableChannels = (response.data.data);
@@ -84,7 +90,7 @@ const UserDashboard = (props) => {
           bg-white rounded-lg shadow-lg
           py-4 px-6
           ">
-            <UserProfile loginUser={props.loginUser} />
+            <UserProfile />
             <GetAllChannels allChannels={allChannels} />
           </div>
           {/* chat box */}
@@ -96,12 +102,7 @@ const UserDashboard = (props) => {
 
       {/* Modals */}
       <div >
-          {showCreateChannelForm && allUsers.length > 0 && <CreateNewChannelForm
-              setShowModal={setShowCreateChannelForm}
-              allUsers={allUsers}
-              loginHeaders={props.loginHeaders}
-              loginUser={props.loginUser}
-          />}
+          {showCreateChannelForm && allUsers.length > 0 && <CreateNewChannelForm />}
       </div>
     </>
   );

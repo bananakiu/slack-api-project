@@ -1,17 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Modal from '../common/Modal';
 import ErrorDisplay from '../common/ErrorDisplay';
 import { useForm, Controller } from 'react-hook-form';
 import Select from 'react-select';
 import axios from "axios";
-import { API } from '../../App';
+import { API, StatesContext } from '../../App';
 
 // TODO: change style of react-select selector
 
-const CreateNewChannelForm = (props) => {
+const CreateNewChannelForm = () => {
     const { register, handleSubmit, control } = useForm();
     const [ errors, setErrors ] = useState([]);
 
+    const { loginUser, loginHeaders, allUsers, setShowCreateChannelForm } = useContext(StatesContext);
+    
     const onSubmit = (data) => {
         let errorList = [];
     
@@ -19,7 +21,7 @@ const CreateNewChannelForm = (props) => {
         let createdChannel = {
             name: data.name,
             // user_ids: data.user_ids.map(option => option.value),
-            user_ids: [props.loginUser.id, ...data.user_ids.map(option => option.value)],
+            user_ids: [loginUser.id, ...data.user_ids.map(option => option.value)],
         }
         
         // POST to server
@@ -28,10 +30,10 @@ const CreateNewChannelForm = (props) => {
             url: `${API}/api/v1/channels`,
             data: createdChannel,
             headers: {
-                "access-token": props.loginHeaders["access-token"],
-                client: props.loginHeaders.client,
-                expiry: props.loginHeaders.expiry,
-                uid: props.loginHeaders.uid,
+                "access-token": loginHeaders["access-token"],
+                client: loginHeaders.client,
+                expiry: loginHeaders.expiry,
+                uid: loginHeaders.uid,
             },
         }).then((response) => {
              // ! TEMP: while the API doesn't work the way it should,
@@ -53,24 +55,24 @@ const CreateNewChannelForm = (props) => {
                 // empty form fields
         
                 // close modal
-                props.setShowModal(false);
+                setShowCreateChannelForm(false);
             }
         })
     }
 
     // preprocessing form inputs
-    let allUsersOptions = props.allUsers.map((indivUser) => {
+    let allUsersOptions = allUsers.map((indivUser) => {
         return {
             value: indivUser.id,
             label: `${indivUser.id} | ${indivUser.uid}`,
         }
     })
 
-    allUsersOptions = allUsersOptions.filter((indivUser) => indivUser.value !== props.loginUser.id);
+    allUsersOptions = allUsersOptions.filter((indivUser) => indivUser.value !== loginUser.id);
 
     // render
     return (
-        <Modal setShowModal={props.setShowModal}>
+        <Modal setShowModal={setShowCreateChannelForm}>
             <form onSubmit={handleSubmit(onSubmit)} tabIndex="-1" className="
             py-4 px-6
             border-gray-150 border-2 rounded-lg
