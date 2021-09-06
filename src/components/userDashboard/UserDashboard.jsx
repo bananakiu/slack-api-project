@@ -10,7 +10,7 @@ import UserProfile from './UserProfile';
 const UserDashboard = (props) => {
     const [allUsers, setAllUsers] = useState({});
     const [allChannels, setAllChannels] = useState({});
-    const [showCreateChannelForm, setShowCreateChannelForm] = useState(false);
+    const [showCreateChannelForm, setShowCreateChannelForm] = useState(true);
 
   const getAlluserData = () => {
     // GET all users
