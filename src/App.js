@@ -15,7 +15,7 @@ function App() {
   const [allUsers, setAllUsers] = useState({});
   const [allChannels, setAllChannels] = useState({});
   const [allChannelsDetails, setAllChannelsDetails] = useState([]);
-  const [showCreateChannelForm, setShowCreateChannelForm] = useState(true);
+  const [showCreateChannelForm, setShowCreateChannelForm] = useState(false);
   const [showAddMemberForm, setShowAddMemberForm] = useState(false);
   const [currentChatId, setCurrentChatId] = useState(null);
   const [currentChatType, setCurrentChatType] = useState(null);
