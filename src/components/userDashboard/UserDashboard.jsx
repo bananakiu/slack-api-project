@@ -18,9 +18,11 @@ const UserDashboard = () => {
     showAddMemberForm,
     allChannelsDetails,
     setAllChannelsDetails,
+    updateChannelsTracker,
+    updateUsersTracker,
   } = useContext(StatesContext);
 
-  const getAlluserData = () => {
+  const getAllUserData = () => {
     // GET all users
     axios({
       method: 'GET',
@@ -61,6 +63,7 @@ const UserDashboard = () => {
           setAllChannels(allAvailableChannels);
           getAllChannelDetails(allAvailableChannels);
       }).catch((error) => {
+          // console.error(error.response);
           console.error(error.response.data.errors);
       })
   }
@@ -88,8 +91,17 @@ const UserDashboard = () => {
 
   useEffect(() => {
       getAllChannels();
-      getAlluserData();
+      getAllUserData();
   }, [])
+
+  // dependent on a tracker to trigger API requests (find a better way in the future)
+  useEffect(() => {
+    setTimeout(() => getAllChannels(), 500)
+  }, [updateChannelsTracker])
+
+  useEffect(() => {
+    setTimeout(() => getAllUserData(), 500)
+  }, [updateUsersTracker])
 
   return (
     <>

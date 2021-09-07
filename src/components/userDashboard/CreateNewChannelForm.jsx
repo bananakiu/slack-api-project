@@ -12,7 +12,14 @@ const CreateNewChannelForm = () => {
     const { register, handleSubmit, control } = useForm();
     const [ errors, setErrors ] = useState([]);
 
-    const { loginUser, loginHeaders, allUsers, setShowCreateChannelForm } = useContext(StatesContext);
+    const {
+        loginUser,
+        loginHeaders,
+        allUsers,
+        setShowCreateChannelForm,
+        updateChannelsTracker,
+        setUpdateChannelsTracker,
+    } = useContext(StatesContext);
     
     const onSubmit = (data) => {
         let errorList = [];
@@ -51,6 +58,7 @@ const CreateNewChannelForm = () => {
                 alert("Channel created!");
 
                 // trigger updating channels in app
+                setUpdateChannelsTracker(updateChannelsTracker+1);
 
                 // empty form fields
         

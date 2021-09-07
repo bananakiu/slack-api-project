@@ -13,6 +13,8 @@ const Chat = () => {
     currentChatId,
     currentChatName,
     currentChatMembers,
+    updateMessagesTracker,
+    setUpdateMessagesTracker,
   } = useContext(StatesContext);
   
   const retrieveAllMessages = () => {
@@ -34,6 +36,7 @@ const Chat = () => {
         const retrieveMessages = (response.data.data);
         // Make a useState for retrieving messages 
         setAllMessages(retrieveMessages);
+        setUpdateMessagesTracker(updateMessagesTracker+1); // change to trigger useEffect to update messages
       }
     })
     .catch((error) => {
@@ -44,7 +47,7 @@ const Chat = () => {
 
   useEffect(() => {
     retrieveAllMessages();
-  }, [currentChatId])
+  }, [currentChatId, updateMessagesTracker])
 
   // const sendMessages = () => {
   //   axios({

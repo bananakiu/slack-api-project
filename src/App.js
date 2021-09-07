@@ -15,13 +15,18 @@ function App() {
   const [allUsers, setAllUsers] = useState({});
   const [allChannels, setAllChannels] = useState({});
   const [allChannelsDetails, setAllChannelsDetails] = useState([]);
-  const [showCreateChannelForm, setShowCreateChannelForm] = useState(false);
+  const [showCreateChannelForm, setShowCreateChannelForm] = useState(true);
   const [showAddMemberForm, setShowAddMemberForm] = useState(false);
   const [currentChatId, setCurrentChatId] = useState(null);
   const [currentChatType, setCurrentChatType] = useState(null);
   const [currentChatName, setCurrentChatName] = useState(null);
   const [currentChatMembers, setCurrentChatMembers] = useState([]);
   const [allMessages, setAllMessages] = useState([]);
+  
+  // trackers to trigger API requests (find a better way in the future)
+  const [updateMessagesTracker, setUpdateMessagesTracker] = useState(0); 
+  const [updateChannelsTracker, setUpdateChannelsTracker] = useState(0);
+  const [updateUsersTracker, setUpdateUsersTracker] = useState(0);
 
 
   const openPage = (page) => {
@@ -64,6 +69,12 @@ function App() {
       setAllMessages,
       currentChatMembers,
       setCurrentChatMembers,
+      updateMessagesTracker,
+      setUpdateMessagesTracker,
+      updateChannelsTracker,
+      setUpdateChannelsTracker,
+      updateUsersTracker,
+      setUpdateUsersTracker,
     }}>
       <div>
         {isOpenLoginPage && <Login/>}

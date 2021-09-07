@@ -18,6 +18,8 @@ const AddMemberForm = () => {
         setShowAddMemberForm,
         currentChatId,
         currentChatMembers,
+        updateChannelsTracker,
+        setUpdateChannelsTracker
     } = useContext(StatesContext);
     
     const onSubmit = (data) => {
@@ -51,7 +53,8 @@ const AddMemberForm = () => {
                 // ! TEMP: alert (turn into nicer alerts)
                 alert("User added to channel!");
 
-                // TODO: re-get allChannels and alLChannelsDetails
+                // re-get allChannels and allChannelsDetails
+                setUpdateChannelsTracker(updateChannelsTracker+1);
         
                 // close modal
                 setShowAddMemberForm(false);
