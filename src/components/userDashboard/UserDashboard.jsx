@@ -15,6 +15,8 @@ const UserDashboard = () => {
     allChannels,
     setAllChannels,
     showCreateChannelForm,
+    allChannelsDetails,
+    setAllChannelsDetails,
   } = useContext(StatesContext);
 
   const getAlluserData = () => {
@@ -43,28 +45,50 @@ const UserDashboard = () => {
       });
   };
 
-    const getAllChannels = () => {
-        axios({
-            method: 'GET',
-            url: `${API}/api/v1/channels`,
-            headers: {
-                "access-token": loginHeaders["access-token"],
-                client: loginHeaders.client,
-                expiry: loginHeaders.expiry,
-                uid: loginHeaders.uid,
-            },
-        }).then((response) => {
-            const allAvailableChannels = (response.data.data);
-            setAllChannels(allAvailableChannels);
-        }).catch((error) => {
-            console.error(error.response.data.errors);
-        })
-    }
+  const getAllChannels = () => {
+      axios({
+          method: 'GET',
+          url: `${API}/api/v1/channels`,
+          headers: {
+              "access-token": loginHeaders["access-token"],
+              client: loginHeaders.client,
+              expiry: loginHeaders.expiry,
+              uid: loginHeaders.uid,
+          },
+      }).then((response) => {
+          const allAvailableChannels = (response.data.data);
+          setAllChannels(allAvailableChannels);
+          getAllChannelDetails(allAvailableChannels);
+      }).catch((error) => {
+          console.error(error.response.data.errors);
+      })
+  }
 
-    useEffect(() => {
-        getAllChannels();
-        getAlluserData();
-    }, [])
+  const getAllChannelDetails = (allAvailableChannels) => {
+    let channelDetailsList  = [];
+    allAvailableChannels.forEach(channel => {
+      axios({
+        method: 'GET',
+        url: `${API}/api/v1/channels/${channel.id}`,
+        headers: {
+          "access-token": loginHeaders["access-token"],
+          client: loginHeaders.client,
+          expiry: loginHeaders.expiry,
+          uid: loginHeaders.uid,
+        },
+      }).then((response) => {
+        channelDetailsList.push(response.data.data);
+        setAllChannelsDetails(channelDetailsList);
+      }).catch((error) => {
+        console.error(error.response.data.errors);
+      })
+    })
+  }
+
+  useEffect(() => {
+      getAllChannels();
+      getAlluserData();
+  }, [])
 
   return (
     <>
@@ -96,6 +120,9 @@ const UserDashboard = () => {
           <Chat />
         </div>
       </div>
+
+      {/* temp */}
+      <p>{JSON.stringify(allChannelsDetails)}</p>
 
       
 
