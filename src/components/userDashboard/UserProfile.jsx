@@ -3,7 +3,6 @@ import { StatesContext } from '../../App';
 
 const UserProfile = () => {
     const { loginUser } = useContext(StatesContext);
-    console.log(loginUser);
 
     return (
         <>
