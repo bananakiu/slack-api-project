@@ -39,7 +39,7 @@ function Modal(props) {
         flex justify-center items-center text-center
         bg-black bg-opacity-50
         `}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16" className="
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" className="bi bi-x" viewBox="0 0 16 16" className="
             fixed z-30 top-0 right-0
             mr-5 mt-3
             hover:text-white
