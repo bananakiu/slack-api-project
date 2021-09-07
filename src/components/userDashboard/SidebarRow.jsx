@@ -12,6 +12,7 @@ function SidebarRow(props) {
         currentChatMembers,
         setCurrentChatMembers,
         allChannelsDetails,
+        setShowAddMemberForm,
     } = useContext(StatesContext);
 
     const handleClick = () => {
@@ -24,6 +25,9 @@ function SidebarRow(props) {
         setCurrentChatId(props.channel.id);
         setCurrentChatType("channel");
         setCurrentChatMembers(thisChannelMembers);
+
+        // ! TEMP
+        setShowAddMemberForm(true);
     }
 
     return (

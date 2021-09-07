@@ -5,7 +5,7 @@ import GetAllChannels from './GetAllChannels';
 import CreateNewChannelForm from './CreateNewChannelForm';
 import Chat from './Chat';
 import UserProfile from './UserProfile';
-
+import AddMemberForm from './AddMemberForm';
 
 const UserDashboard = () => {
   const {
@@ -15,6 +15,7 @@ const UserDashboard = () => {
     allChannels,
     setAllChannels,
     showCreateChannelForm,
+    showAddMemberForm,
     allChannelsDetails,
     setAllChannelsDetails,
   } = useContext(StatesContext);
@@ -126,7 +127,10 @@ const UserDashboard = () => {
 
       {/* Modals */}
       <div >
-          {showCreateChannelForm && allUsers.length > 0 && <CreateNewChannelForm />}
+        {showCreateChannelForm && allUsers.length > 0 && <CreateNewChannelForm />}
+      </div>
+      <div>
+        {showAddMemberForm && allUsers.length > 0 && <AddMemberForm />}
       </div>
     </>
   );
