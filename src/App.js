@@ -14,10 +14,13 @@ function App() {
   const [loginUser, setLoginUser] = useState({});
   const [allUsers, setAllUsers] = useState({});
   const [allChannels, setAllChannels] = useState({});
+  const [allChannelsDetails, setAllChannelsDetails] = useState([]);
   const [showCreateChannelForm, setShowCreateChannelForm] = useState(false);
+  const [showAddMemberForm, setShowAddMemberForm] = useState(false);
   const [currentChatId, setCurrentChatId] = useState(null);
   const [currentChatType, setCurrentChatType] = useState(null);
   const [currentChatName, setCurrentChatName] = useState(null);
+  const [currentChatMembers, setCurrentChatMembers] = useState([]);
 
 
   const openPage = (page) => {
@@ -44,14 +47,20 @@ function App() {
       setAllUsers,
       allChannels,
       setAllChannels,
+      allChannelsDetails,
+      setAllChannelsDetails,
       showCreateChannelForm,
       setShowCreateChannelForm,
+      showAddMemberForm,
+      setShowAddMemberForm,
       currentChatId,
       setCurrentChatId,
       currentChatType,
       setCurrentChatType,
       currentChatName,
       setCurrentChatName,
+      currentChatMembers,
+      setCurrentChatMembers,
     }}>
       <div>
         {isOpenLoginPage && <Login/>}

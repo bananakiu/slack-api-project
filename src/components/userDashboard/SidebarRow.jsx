@@ -9,12 +9,25 @@ function SidebarRow(props) {
         setCurrentChatId,
         currentChatType,
         setCurrentChatType,
+        currentChatMembers,
+        setCurrentChatMembers,
+        allChannelsDetails,
+        setShowAddMemberForm,
     } = useContext(StatesContext);
 
     const handleClick = () => {
+        // save channel members
+        let thisChannelDetails = allChannelsDetails.filter(channel => channel.id === props.channel.id)[0];
+        let thisChannelMembers = thisChannelDetails.channel_members.map(memberObj => memberObj.user_id);
+
+        // save channel details
         setCurrentChatName(props.channel.name);
         setCurrentChatId(props.channel.id);
         setCurrentChatType("channel");
+        setCurrentChatMembers(thisChannelMembers);
+
+        // ! TEMP
+        setShowAddMemberForm(true);
     }
 
     return (
