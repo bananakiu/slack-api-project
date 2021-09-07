@@ -9,7 +9,6 @@ const GetAllChannels = () => {
         if (allChannels !== undefined && allChannels.length > 0) {
             return (
                 allChannels.map((channel, index) => {
-                    console.log(channel);
                     return(
                         <SidebarRow
                             key={index}
