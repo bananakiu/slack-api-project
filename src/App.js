@@ -15,6 +15,10 @@ function App() {
   const [allUsers, setAllUsers] = useState({});
   const [allChannels, setAllChannels] = useState({});
   const [showCreateChannelForm, setShowCreateChannelForm] = useState(false);
+  const [currentChatId, setCurrentChatId] = useState(null);
+  const [currentChatType, setCurrentChatType] = useState(null);
+  const [currentChatName, setCurrentChatName] = useState(null);
+
 
   const openPage = (page) => {
     setIsOpenLoginPage(page==="login" ? true : false);
@@ -25,6 +29,7 @@ function App() {
 
   return <>
     <StatesContext.Provider value={{
+      openPage,
       isOpenLoginPage,
       setIsOpenLoginPage,
       isOpenSignUpPage,
@@ -41,16 +46,17 @@ function App() {
       setAllChannels,
       showCreateChannelForm,
       setShowCreateChannelForm,
-      openPage,
+      currentChatId,
+      setCurrentChatId,
+      currentChatType,
+      setCurrentChatType,
+      currentChatName,
+      setCurrentChatName,
     }}>
       <div>
         {isOpenLoginPage && <Login/>}
         {isOpenUserDashboard && <UserDashboard/>}
-        {isOpenSignUpPage && <Signup
-          openPage={openPage}
-          setLoginHeaders={setLoginHeaders}
-          setLoginUser={setLoginUser}
-        />}
+        {isOpenSignUpPage && <Signup/>}
 
       </div>
     </StatesContext.Provider>
