@@ -25,7 +25,7 @@ const GetAllChannels = () => {
     }
         return (
             <>
-                <div className="flex flex-col w-56 bg-white rounded-2xl overflow-hidden">
+                <div className="flex flex-col w-56 bg-white rounded-2xl overflow-hidden border-2">
                     <h1 className="text-3xl uppercase text-red-500">Channels</h1>
                     <ul className="flex flex-col py-4 ">
                         {displayAllAvailableChannels(allChannels)}
