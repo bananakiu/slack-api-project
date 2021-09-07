@@ -81,14 +81,13 @@ const UserDashboard = () => {
         className='
         flex justify-center
         bg-white rounded-lg shadow-lg
-        py-6 px-6
+        py-10 px-6
         w-4/5 h-4/5 
         '>
           {/* sidebar */}
           <div className="
           flex flex-col
-          bg-white rounded-lg shadow-lg
-          py-4 px-6
+          // bg-white
           ">
             <UserProfile />
             <GetAllChannels allChannels={allChannels} />
