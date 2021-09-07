@@ -31,7 +31,7 @@ function SidebarRow(props) {
     }
 
     return (
-        <div key={props.key} onClick={() => handleClick()}
+        <div onClick={() => handleClick()}
         className="
         flex justify-between align-center
         m-1 py-2 px-3
