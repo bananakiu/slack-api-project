@@ -1,6 +1,53 @@
+import axios from 'axios';
 import React from 'react';
+import { API, StatesContext } from '../../App';
+import { useState, useEffect, useContext } from 'react';
+import GetAllChannels from './GetAllChannels';
 
 const Chat = () => {
+
+  const {
+    loginHeaders,
+    allMessages,
+    setAllMessages,
+  } = useContext(StatesContext);
+  
+  const retrieveAllMessages = () => {
+    axios({
+      method: 'GET',
+      url: `${API}/api/v1/messages?receiver_id=1&receiver_class=Channel`,
+      headers: {
+        "access-token": loginHeaders['access-token'],
+        client: loginHeaders.client,
+        expiry: loginHeaders.expiry,
+        uid: loginHeaders.uid,
+      },
+    }).then((response) => {
+      // console.log(response.data.data);
+      const retrieveMessages = (response.data.data);
+      // Make a useState for retrieving messages 
+      setAllMessages(retrieveMessages);
+    })
+    .catch((error) => {
+      console.error(error.response.data.errors); 
+    })
+  }
+
+
+  useEffect(() => {
+    retrieveAllMessages();
+  }, [])
+
+  // const sendMessages = () => {
+  //   axios({
+  //     method: 'POS',
+  //     url: `${API}/api/v1/messages`,
+  //     headers: {
+  //       "ac"
+  //     }
+  //   })
+  // }
+
   return (
     // Chat container
     <div className='
@@ -23,7 +70,10 @@ const Chat = () => {
         </div>
 
         {/*List out all the messages */}
-        <div className=''></div>
+        <div>
+          {/* {console.log(allMessages)} */}
+          {allMessages.map((message, index) => (<p key={index}>{message.body}</p>))}
+        </div>s
       </>
     </div>
   );

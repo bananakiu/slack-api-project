@@ -20,6 +20,7 @@ function App() {
   const [currentChatId, setCurrentChatId] = useState(null);
   const [currentChatType, setCurrentChatType] = useState(null);
   const [currentChatName, setCurrentChatName] = useState(null);
+  const [allMessages, setAllMessages] = useState([]);
   const [currentChatMembers, setCurrentChatMembers] = useState([]);
 
 
@@ -59,6 +60,8 @@ function App() {
       setCurrentChatType,
       currentChatName,
       setCurrentChatName,
+      allMessages,
+      setAllMessages,
       currentChatMembers,
       setCurrentChatMembers,
     }}>
