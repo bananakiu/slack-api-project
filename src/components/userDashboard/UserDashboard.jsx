@@ -124,8 +124,6 @@ const UserDashboard = () => {
       {/* temp */}
       <p>{JSON.stringify(allChannelsDetails)}</p>
 
-      
-
       {/* Modals */}
       <div >
           {showCreateChannelForm && allUsers.length > 0 && <CreateNewChannelForm />}

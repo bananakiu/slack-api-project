@@ -20,6 +20,7 @@ function App() {
   const [currentChatId, setCurrentChatId] = useState(null);
   const [currentChatType, setCurrentChatType] = useState(null);
   const [currentChatName, setCurrentChatName] = useState(null);
+  const [currentChatMembers, setCurrentChatMembers] = useState([]);
 
 
   const openPage = (page) => {
@@ -58,6 +59,8 @@ function App() {
       setCurrentChatType,
       currentChatName,
       setCurrentChatName,
+      currentChatMembers,
+      setCurrentChatMembers,
     }}>
       <div>
         {isOpenLoginPage && <Login/>}
