@@ -3,6 +3,7 @@ import React from 'react';
 import { API, StatesContext } from '../../App';
 import { useState, useEffect, useContext } from 'react';
 import GetAllChannels from './GetAllChannels';
+import ChatBox from './ChatBox';
 
 const Chat = () => {
 
@@ -70,10 +71,12 @@ const Chat = () => {
         </div>
 
         {/*List out all the messages */}
-        <div>
-          {/* {console.log(allMessages)} */}
-          {allMessages.map((message, index) => (<p key={index}>{message.body}</p>))}
-        </div>s
+        <div className='mt-5'>
+          {allMessages.map((message, index) => (<p key={index} className='m-1 mb-2 py-2 px-3 max-w-max border-gray-300 border-2 rounded-lg '> {message.body}</p>))}
+        </div>
+
+        {/* Chat box component */}
+        <ChatBox/>
       </>
     </div>
   );
