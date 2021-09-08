@@ -76,7 +76,7 @@ const Chat = () => {
         </div>
 
         {/* Chat box component */}
-        <ChatBox/>
+        <ChatBox />
       </>
     </div>
   );
