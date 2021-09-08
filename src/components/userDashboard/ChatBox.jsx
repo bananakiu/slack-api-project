@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { API, StatesContext } from '../../App';
 import { useState, useEffect, useContext } from 'react';
+import { retrieveAllMessages } from './Chat'
 
 const ChatBox = () => {
   const {register, handleSubmit} = useForm();
@@ -10,7 +11,8 @@ const ChatBox = () => {
    const {
      loginHeaders,
      currentChatType,
-     setCurrentChatType
+     setCurrentChatType,
+     setAllMessages
 
   } = useContext(StatesContext);
 
@@ -21,7 +23,7 @@ const ChatBox = () => {
     let createdMessage = {
       "receiver_id": 1,
       "receiver_class": "Channel",
-      "body": {data}
+      "body": data.message
     }
 
     // POST messages to API server
@@ -36,14 +38,15 @@ const ChatBox = () => {
         uid: loginHeaders.uid,
       },
     }).then((response) => {
-      console.log(response);
+      // Refetch messages 
+      retrieveAllMessages(loginHeaders, setAllMessages);
     })
   }
 
 
   return (
     <>
-      <div>
+      <div className='flex-none border-2 h-16'>
         <form onSubmit={handleSubmit(onSubmit)} className='flex justify-between w-full'>
           <input type="text" placeholder="Enter your message here" name="message" {...register('message')} className='w-full m-1 mb-2 py-2 px-3 w-full border-gray-300 border-2 rounded-lg' />
           <input type="submit" className='max-w-max bg-blue-800 text-white border-blue-700 border-2 rounded-lg m-1 mb-2 py-2 px-3 cursor-pointer' />
