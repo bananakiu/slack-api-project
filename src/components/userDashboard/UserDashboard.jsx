@@ -18,6 +18,7 @@ const UserDashboard = () => {
     showAddMemberForm,
     allChannelsDetails,
     setAllChannelsDetails,
+    currentChannelId,
   } = useContext(StatesContext);
 
   const getAlluserData = () => {

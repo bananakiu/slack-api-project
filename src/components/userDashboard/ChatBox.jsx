@@ -8,12 +8,11 @@ import { retrieveAllMessages } from './Chat'
 const ChatBox = () => {
   const {register, handleSubmit} = useForm();
 
-   const {
-     loginHeaders,
-     currentChatType,
-     setCurrentChatType,
-     setAllMessages
-
+  const {
+    loginHeaders,
+    currentChatType,
+    currentChatId,
+    setAllMessages,
   } = useContext(StatesContext);
 
   // Collects messages from form // Done
@@ -21,9 +20,9 @@ const ChatBox = () => {
     console.log(data);
 
     let createdMessage = {
-      "receiver_id": 1,
-      "receiver_class": "Channel",
-      "body": data.message
+      "receiver_id": currentChatId,
+      "receiver_class": currentChatType,
+      "body": data.message,
     }
 
     // POST messages to API server
@@ -39,7 +38,7 @@ const ChatBox = () => {
       },
     }).then((response) => {
       // Refetch messages 
-      retrieveAllMessages(loginHeaders, setAllMessages);
+      retrieveAllMessages(loginHeaders, setAllMessages, currentChatId, currentChatType);
     })
   }
 
