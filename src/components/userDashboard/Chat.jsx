@@ -27,18 +27,21 @@ export const retrieveAllMessages = (loginHeaders, setAllMessages) => {
 }
 
 const Chat = () => {
-
   const {
     loginHeaders,
     allMessages,
     setAllMessages,
+    currentChatType,
+    currentChatId,
+    currentChatName,
+    currentChatMembers,
   } = useContext(StatesContext);
   
   retrieveAllMessages(loginHeaders, setAllMessages);
 
   useEffect(() => {
     retrieveAllMessages(loginHeaders, setAllMessages);
-  }, [])
+  }, [currentChatId])
 
   // const sendMessages = () => {
   //   axios({
@@ -62,8 +65,8 @@ const Chat = () => {
     '>
         <div className='flex flex-none justify-between p-5 border-b-2 border-lightgray-600 h-16'>
           <div>
-            <h4 className='flex lowercase'>
-              <strong>#Room-name</strong>
+            <h4 className={`flex lowercase ${currentChatId === null ? "capitalize" : ""}`}>
+              <strong>{`${currentChatId === null ? "No Channel/User Selected" : currentChatName}`}</strong>
             </h4>
           </div>
 
@@ -74,7 +77,17 @@ const Chat = () => {
 
         {/*List out all the messages */}
         <div className='mt-5 overflow-y-auto flex-grow'>
-          {allMessages.map((message, index) => (<p key={index} className='m-1 mb-2 py-2 px-3 max-w-max border-gray-300 border-2 rounded-lg '> {message.body}</p>))}
+          { currentChatId !== null && allMessages !== undefined && allMessages.length > 0 &&
+            allMessages.map((message, index) => (<p key={index} className='m-1 mb-2 py-2 px-3 max-w-max border-gray-300 border-2 rounded-lg '> {message.body}</p>))
+          }
+          {/* default message */}
+          { currentChatId !== null && allMessages !== undefined && allMessages.length === 0 &&
+            <p>No message history.</p>
+          }
+          {/* default message */}
+          { currentChatId === null &&
+            <p>Select a channel or user to chat with.</p>
+          }
         </div>
 
         {/* Chat box component */}

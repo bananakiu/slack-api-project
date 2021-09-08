@@ -23,7 +23,7 @@ function SidebarRow(props) {
         // save channel details
         setCurrentChatName(props.channel.name);
         setCurrentChatId(props.channel.id);
-        setCurrentChatType("channel");
+        setCurrentChatType("Channel");
         setCurrentChatMembers(thisChannelMembers);
 
         // ! TEMP
