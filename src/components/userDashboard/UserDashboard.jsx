@@ -6,6 +6,7 @@ import CreateNewChannelForm from './CreateNewChannelForm';
 import Chat from './Chat';
 import UserProfile from './UserProfile';
 import AddMemberForm from './AddMemberForm';
+import AddDirectMessage from './AddDirectMessage';
 
 const UserDashboard = () => {
   const {
