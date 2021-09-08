@@ -40,7 +40,7 @@ const Chat = () => {
       }
     })
     .catch((error) => {
-      console.error(error.response.data.errors); 
+      console.error(error?.response?.data?.errors); 
     })
   }
 

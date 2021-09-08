@@ -41,7 +41,7 @@ const UserDashboard = () => {
         
       })
       .catch((error) => {
-        console.error(error.response.data.errors); // ! TEMP
+        console.error(error?.response?.data?.errors); // ! TEMP
       })
       .then(() => {
         // handle errors
