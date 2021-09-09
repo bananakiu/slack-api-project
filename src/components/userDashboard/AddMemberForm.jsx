@@ -7,6 +7,10 @@ import axios from "axios";
 import { API, StatesContext } from '../../App';
 
 // TODO: change style of react-select selector
+const searchMember = (allUsers, id) => {
+    let memberDetails = allUsers.filter((user) => user.id === id);
+    return memberDetails[0];
+}
 
 const AddMemberForm = () => {
     const { register, handleSubmit, control } = useForm();
@@ -125,14 +129,28 @@ const AddMemberForm = () => {
                 flex flex-col
                 ">
                     <h2 className="self-start">Current members</h2>
-                    <div className="
-                    flex flex-col justify-center items-center
+                    <ul className="
+                    flex flex-col justify-start items-center
                     mb-4
-                    w-full
-                    border-2 rounded-lg h-72
+                    border-2 rounded-lg h-72 w-full
+                    overflow-y-auto	
                     ">
-                        TO FOLLOW
-                    </div>
+                        {currentChatMembers !== undefined &&
+                            currentChatMembers.map((memberId) => {
+                                let memberDetails = searchMember(allUsers, memberId)
+                                return <>
+                                    <li className="
+                                    border-b-2
+                                    hover:bg-gray-50
+                                    flex justify-center items-center
+                                    w-full h-10 p-2
+                                    ">
+                                        {memberDetails.uid}
+                                    </li>
+                                </>
+                            })
+                        }
+                    </ul>
                 </div>
 
                 <div className="
