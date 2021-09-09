@@ -40,6 +40,7 @@ const Chat = () => {
     currentChatId,
     currentChatName,
     currentChatMembers,
+    setShowAddMemberForm,
   } = useContext(StatesContext);
   
   useEffect(() => {
@@ -56,15 +57,32 @@ const Chat = () => {
     h-full
     border-8
     '>
-        <div className='flex flex-none justify-between p-5 border-b-2 border-lightgray-600 h-16'>
+        <div className='
+        flex justify-between items-center flex-none
+        border-b-2 border-lightgray-600
+        p-5 h-16
+        '>
           <div>
-            <h4 className={`flex lowercase ${currentChatId === null ? "capitalize" : ""}`}>
-              <strong>{`${currentChatId === null ? "No Channel/User Selected" : currentChatName}`}</strong>
+            <h4 className={`flex font-bold lowercase ${currentChatId === null ? "capitalize" : ""}`}>
+              {`${currentChatId === null ? "No Channel/User Selected" : currentChatName}`}
             </h4>
           </div>
 
-          <div>
-            <p>Details</p>
+          <div className="
+          flex justify-center align-center
+          ">
+            {currentChatType === "Channel" &&
+              <button type="button" onClick={() => setShowAddMemberForm(true)} className="
+              flex justify-between align-center
+              border-gray-300 border-2 hover:bg-gray-200 rounded-lg
+              w-32 px-2
+              text-center text-gray-500 font-semibold
+              ">
+                <p className="">Members</p>
+                <p className="text-gray-300 font-normal">|</p>
+                <p>{currentChatMembers.length}</p>
+              </button>
+            }
           </div>
         </div>
 

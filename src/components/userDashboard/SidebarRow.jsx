@@ -25,9 +25,6 @@ function SidebarRow(props) {
         setCurrentChatId(props.channel.id);
         setCurrentChatType("Channel");
         setCurrentChatMembers(thisChannelMembers);
-
-        // ! TEMP
-        setShowAddMemberForm(true);
     }
 
     return (
