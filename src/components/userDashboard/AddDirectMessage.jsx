@@ -3,32 +3,37 @@ import Modal from '../common/Modal';
 import ErrorDisplay from '../common/ErrorDisplay';
 import { useForm, Controller } from 'react-hook-form';
 import Select from 'react-select';
-import axios from 'axios';
 import { API, StatesContext } from '../../App';
 
 const AddDirectMessage = () => {
     const { register, handleSubmit, control } = useForm();
 
-    const { loginUser, allUsers} = useContext(StatesContext);
+    const { 
+        loginUser, allUsers, 
+        currentChatId, setCurrentChatId,
+        currentChatType,setCurrentChatType,
+        currentChatName,setCurrentChatName} = useContext(StatesContext);
 
     const onSubmit = (data) => {
-
+        console.log(data)
+        if(data.user_id?.label !== undefined && data.user_id?.value !== undefined) {
+            // console.log(data)
+            setCurrentChatName(data.user_id.label);
+            setCurrentChatId(data.user_id.value);
+            setCurrentChatType("User");
+        }
     }
 
     let allUsersOptions = allUsers.map((indivUser) => {
         return {
             value: indivUser.id,
-            label: `${indivUser.id} | ${indivUser.uid}`,
+            label: `${indivUser.uid}`,
         }
     })
 
     return (
             <form onSubmit={handleSubmit(onSubmit)} tabIndex="-1" className="
-            py-4 px-6
-            border-gray-150 border-2 rounded-lg
-            transition duration-200
-            bg-white
-            w-96 lg:w-4/12
+            flex flex-col items-center justify-center h-30 w-50 mb-3 bg-gray-100 rounded-2xl object-scale-down
             ">
                 <h1 className="
                 self-start text-left
@@ -37,14 +42,14 @@ const AddDirectMessage = () => {
                 ">
                     Add a person to chat with!
                 </h1>
-                {errors.length>0 &&
+                {/* {errors.length>0 &&
                     <div className="
                     flex flex-col justify-center items-center
                     w-full mb-4
                     ">
                         <ErrorDisplay errors={errors}/>
                     </div>
-                }
+                } */}
                 <div className="
                 flex flex-col justify-center items-center
                 mb-4
@@ -63,22 +68,12 @@ const AddDirectMessage = () => {
                                 required
                                 placeholder="Select from this list"
                                 className="w-full text-left"
+                                setValue={handleSubmit(onSubmit)}
+                                // onChange={handleSubmit(onSubmit)}
                                 // styles={}
                             />
                         )}
                     />
-                </div>
-                    <div className="
-                    flex justify-end items-center
-                    w-full
-                    ">
-                        <button className="
-                        py-2 px-4 mt-2 rounded
-                        bg-blue-500 hover:bg-blue-700
-                        text-white font-bold
-                        ">
-                        Select User!
-                    </button>
                 </div>
             </form>
     )
