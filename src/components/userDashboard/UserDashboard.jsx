@@ -117,6 +117,7 @@ const UserDashboard = () => {
           ">
             <UserProfile />
             <GetAllChannels allChannels={allChannels} />
+            {allUsers.length > 0 && <AddDirectMessage  />}
           </div>
           {/* chat box */}
           <Chat />
