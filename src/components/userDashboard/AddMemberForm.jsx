@@ -18,6 +18,7 @@ const AddMemberForm = () => {
         setShowAddMemberForm,
         currentChatId,
         currentChatMembers,
+        currentChatName,
     } = useContext(StatesContext);
     
     const onSubmit = (data) => {
@@ -85,7 +86,7 @@ const AddMemberForm = () => {
                 text-2xl font-bold
                 mb-4
                 ">
-                    Add a member
+                    {`${currentChatName} members`}
                 </h1>
                 {errors.length>0 &&
                     <div className="
@@ -100,7 +101,7 @@ const AddMemberForm = () => {
                 mb-4
                 w-full
                 ">
-                    <label htmlFor="user_id" className="self-start">Add People</label> 
+                    <label htmlFor="user_id" className="self-start">Add people</label> 
                     <Controller
                         name="user_id"
                         isClearable
@@ -118,6 +119,22 @@ const AddMemberForm = () => {
                         )}
                     />
                 </div>
+                
+                {/* List of Members */}
+                <div className="
+                flex flex-col
+                ">
+                    <h2 className="self-start">Current members</h2>
+                    <div className="
+                    flex flex-col justify-center items-center
+                    mb-4
+                    w-full
+                    border-2 rounded-lg h-72
+                    ">
+                        TO FOLLOW
+                    </div>
+                </div>
+
                 <div className="
                 flex justify-end items-center
                 w-full
