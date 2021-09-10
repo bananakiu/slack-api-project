@@ -66,7 +66,7 @@ const UserDashboard = () => {
       if (channelData) {
         getAllChannelDetails(channelData);
       } else {
-        setAllChannelsDetails(null);
+        setAllChannelsDetails([]);
       }
     }).catch((error) => {
       console.error(error?.response?.data?.errors);
