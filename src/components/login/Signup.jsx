@@ -70,17 +70,16 @@ const Signup = () => {
       <form
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div className="absolute bg-gradient-to-b from-purple-400 to-purple-600 opacity-75 inset-0 z-0"></div>
-          <div className="min-h-screen sm:flex sm:flex-row mx-0 justify-center">
-            <div className="flex-col flex self-center p-10 sm:max-w-5xl xl:max-w-2xl z-10">
-              <div className="-mt-12 self-start hidden lg:flex flex-col  text-black">
-                <h1 className="mb-3 font-bold text-5xl">Thanks for the interest in our app! 🙏</h1>
-                <h1 className="ml-1 mt-2 mb-2 font-bold text-2xl">It seems like you haven't registered...</h1>
-                <p className="ml-1 mt-2 pr-3 text-gray-800 text-1xl font-semibold">
-                  Please do register in the form found on the right to hop right in Fireside!
-                </p>
-              </div>
-          </div>
+        <div className="bg-gradient-to-b from-purple-300 to-purple-500 min-h-screen sm:flex sm:flex-row mx-0 justify-center">
+          <div className="flex-col flex self-center p-10 sm:max-w-5xl xl:max-w-2xl z-10">
+            <div className="-mt-12 self-start hidden lg:flex flex-col  text-black">
+              <h1 className="mb-3 font-bold text-5xl">Thanks for the interest in our app! 🙏</h1>
+              <h1 className="ml-1 mt-2 mb-2 font-bold text-2xl">It seems like you haven't registered...</h1>
+              <p className="ml-1 mt-2 pr-3 text-gray-800 text-1xl font-semibold">
+                Please do register in the form found on the right to hop right in Fireside!
+              </p>
+            </div>
+        </div>
 
         <div className="ml-12 flex justify-center self-center z-10">
           <div className="p-12 bg-white mx-auto rounded-2xl w-100 ">

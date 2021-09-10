@@ -63,8 +63,7 @@ const Login = () => {
 
 return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="absolute bg-gradient-to-b from-purple-400 to-purple-600 opacity-75 inset-0 z-0"></div>
-      <div className="min-h-screen sm:flex sm:flex-row mx-0 justify-center">
+      <div className="bg-gradient-to-b from-purple-300 to-purple-500 min-h-screen sm:flex sm:flex-row mx-0 justify-center">
         <div className="flex-col flex self-center p-10 sm:max-w-5xl xl:max-w-2xl z-10">
           <div className="-mt-12 self-start hidden lg:flex flex-col  text-black">
             <h1 className="mb-3 font-bold text-6xl">Hi, there! 👋</h1>

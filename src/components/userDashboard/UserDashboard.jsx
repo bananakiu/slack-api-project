@@ -103,7 +103,7 @@ const UserDashboard = () => {
     <>
       {/* background */}
       <div className='
-      py-6 bg-purple-600
+      py-6 bg-gradient-to-b from-purple-300 to-purple-500
       flex items-center justify-center
       w-full h-screen
       border-box
