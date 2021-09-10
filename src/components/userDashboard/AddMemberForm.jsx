@@ -138,10 +138,10 @@ const AddMemberForm = () => {
                     overflow-y-auto	
                     ">
                         {currentChatMembers !== undefined &&
-                            currentChatMembers.map((memberId) => {
+                            currentChatMembers.map((memberId, index) => {
                                 let memberDetails = searchMember(allUsers, memberId)
-                                return <>
-                                    <li className="
+                                return (
+                                    <li key={index} className="
                                     border-b-2
                                     hover:bg-gray-50
                                     flex justify-center items-center
@@ -149,7 +149,7 @@ const AddMemberForm = () => {
                                     ">
                                         {memberDetails.uid}
                                     </li>
-                                </>
+                                )
                             })
                         }
                     </ul>
