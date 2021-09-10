@@ -7,6 +7,10 @@ import axios from "axios";
 import { API, StatesContext } from '../../App';
 
 // TODO: change style of react-select selector
+const searchMember = (allUsers, id) => {
+    let memberDetails = allUsers.filter((user) => user.id === id);
+    return memberDetails[0];
+}
 
 const AddMemberForm = () => {
     const { register, handleSubmit, control } = useForm();
@@ -19,7 +23,8 @@ const AddMemberForm = () => {
         currentChatId,
         currentChatMembers,
         updateChannelsTracker,
-        setUpdateChannelsTracker
+        setUpdateChannelsTracker,
+        currentChatName,
     } = useContext(StatesContext);
     
     const onSubmit = (data) => {
@@ -88,7 +93,7 @@ const AddMemberForm = () => {
                 text-2xl font-bold
                 mb-4
                 ">
-                    Add a member
+                    {`${currentChatName} members`}
                 </h1>
                 {errors.length>0 &&
                     <div className="
@@ -103,7 +108,7 @@ const AddMemberForm = () => {
                 mb-4
                 w-full
                 ">
-                    <label htmlFor="user_id" className="self-start">Add People</label> 
+                    <label htmlFor="user_id" className="self-start">Add people</label> 
                     <Controller
                         name="user_id"
                         isClearable
@@ -121,6 +126,36 @@ const AddMemberForm = () => {
                         )}
                     />
                 </div>
+                
+                {/* List of Members */}
+                <div className="
+                flex flex-col
+                ">
+                    <h2 className="self-start">Current members</h2>
+                    <ul className="
+                    flex flex-col justify-start items-center
+                    mb-4
+                    border-2 rounded-lg h-72 w-full
+                    overflow-y-auto	
+                    ">
+                        {currentChatMembers !== undefined &&
+                            currentChatMembers.map((memberId) => {
+                                let memberDetails = searchMember(allUsers, memberId)
+                                return <>
+                                    <li className="
+                                    border-b-2
+                                    hover:bg-gray-50
+                                    flex justify-center items-center
+                                    w-full h-10 p-2
+                                    ">
+                                        {memberDetails.uid}
+                                    </li>
+                                </>
+                            })
+                        }
+                    </ul>
+                </div>
+
                 <div className="
                 flex justify-end items-center
                 w-full

@@ -25,20 +25,18 @@ function SidebarRow(props) {
         setCurrentChatId(props.channel.id);
         setCurrentChatType("Channel");
         setCurrentChatMembers(thisChannelMembers);
-
-        // ! TEMP
-        setShowAddMemberForm(true);
     }
 
     return (
         <div onClick={() => handleClick()}
-        className="
+        className={`
         flex justify-between align-center
-        m-1 py-2 px-3
-        border-gray-200 border-2 rounded-lg
-        hover:shadow-md cursor-pointer
+        my-1 py-1 px-3
+        bg-gray-100
+        rounded-md
+        hover:bg-gray-200 cursor-pointer ${props.channel.id===currentChatId ? "bg-gray-300 hover:bg-gray-300" : ""}
         transition duration-200
-        ">
+        `}>
             {props.children}
         </div>
     )

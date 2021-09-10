@@ -1,11 +1,12 @@
 import axios from 'axios';
 import { API, StatesContext } from '../../App';
 import { useState, useEffect, useContext } from 'react';
-import GetAllChannels from './GetAllChannels';
+import SideBarList from './SideBarList';
 import CreateNewChannelForm from './CreateNewChannelForm';
 import Chat from './Chat';
 import UserProfile from './UserProfile';
 import AddMemberForm from './AddMemberForm';
+import AddDirectMessage from './AddDirectMessage';
 
 const UserDashboard = () => {
   const {
@@ -20,6 +21,7 @@ const UserDashboard = () => {
     setAllChannelsDetails,
     updateChannelsTracker,
     updateUsersTracker,
+    currentChannelId,
   } = useContext(StatesContext);
 
   const getAllUserData = () => {
@@ -107,7 +109,7 @@ const UserDashboard = () => {
     <>
       {/* background */}
       <div className='
-      py-6 bg-red-300
+      py-6 bg-purple-600
       flex items-center justify-center
       w-full h-screen
       border-box
@@ -118,15 +120,21 @@ const UserDashboard = () => {
         flex justify-center
         bg-white rounded-lg shadow-lg
         py-10 px-6
-        w-4/5 h-4/5 
+        w-4/5 h-full 
         '>
           {/* sidebar */}
           <div className="
-          flex flex-col
-          // bg-white
+          flex flex-col justify-between
+          w-56 h-full
           ">
             <UserProfile />
-            <GetAllChannels allChannels={allChannels} />
+            <SideBarList />
+            {/* <div className="flex-grow border-8 overflow-y-auto">
+              <div className="text-9xl">X</div>
+              <div className="text-9xl">X</div>
+              <div className="text-9xl">X</div>
+            </div> */}
+            {allUsers.length > 0 && <AddDirectMessage  />}
           </div>
           {/* chat box */}
           <Chat />
