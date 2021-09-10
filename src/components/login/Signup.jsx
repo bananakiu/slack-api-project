@@ -40,8 +40,8 @@ const Signup = () => {
       setLoginUser(response.data.data)
       setLoginHeaders(response.headers);
     }).catch((error) => {
-      // console.error(error.response.data.errors); // ! TEMP
-      errorList.push(...error.response.data.errors.full_messages);
+      // console.log(error?.response?.data?.errors?.full_messages) // ! TEMP
+      errorList.push(...error?.response?.data?.errors?.full_messages);
       setErrors(errorList);
     }).then(() => {
       if (errorList.length === 0) {
