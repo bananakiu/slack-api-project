@@ -105,7 +105,6 @@ const UserDashboard = () => {
 
   useEffect(() => {
     retrieveAllMessages(loginHeaders, setAllMessages, currentChatId, currentChatType);
-    console.log(currentChatType)
   }, [currentChatId])
 
   return (

@@ -50,8 +50,8 @@ const Chat = () => {
       <div className='flex justify-between items-center flex-none border-b-2 border-lightgray-600 p-4 h-16'>
         {/* channel name */}
         <div>
-          <h4 className={`flex font-bold lowercase ${currentChatId === null ? "capitalize" : ""}`}>
-            {`${currentChatId === null ? "No Channel/User Selected" : currentChatName}`}
+          <h4 className={`flex font-bold lowercase ${currentChatId === null || currentChatId === undefined ? "capitalize" : ""}`}>
+            {`${currentChatId === null || currentChatId === undefined ? "No Channel/User Selected" : currentChatName}`}
           </h4>
         </div>
 
@@ -76,7 +76,7 @@ const Chat = () => {
 
       {/*List out all the messages */}
       <div className='flex flex-col flex-grow p-4 overflow-y-auto'>
-        { currentChatId !== null && allMessages !== undefined && allMessages.length > 0 &&
+        { currentChatId !== null && currentChatId !== undefined && allMessages !== undefined && allMessages.length > 0 &&
           allMessages.map((message, index) => (
             <div key={index} className={`flex flex-col mb-2 ${message.sender.id === loginUser.id ? 'self-end' : 'self-start'}`}>
               { message.sender.id !== loginUser.id &&
@@ -87,11 +87,11 @@ const Chat = () => {
             ))
         }
         {/* default message */}
-        { currentChatId !== null && allMessages !== undefined && allMessages.length === 0 &&
+        { currentChatId !== null && currentChatId !== undefined && allMessages !== undefined && allMessages.length === 0 &&
           <p>No message history.</p>
         }
         {/* default message */}
-        { currentChatId === null &&
+        { currentChatId === null || currentChatId === undefined &&
           <p className='justify-self-end self-center'>Select a channel or user to chat with.</p>
         }
       </div>
