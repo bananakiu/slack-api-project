@@ -22,14 +22,13 @@ function App() {
   const [currentChatName, setCurrentChatName] = useState(null);
   const [currentChatMembers, setCurrentChatMembers] = useState([]);
   const [allMessages, setAllMessages] = useState([]);
-
+  const [memberCount, setMemberCount] = useState(0);
 
   const openPage = (page) => {
     setIsOpenLoginPage(page==="login" ? true : false);
     setIsOpenSignUpPage(page==="signup" ? true : false);
     setIsOpenUserDashboard(page==="dashboard" ? true : false);
   }
-
 
   return <>
     <StatesContext.Provider value={{
@@ -64,6 +63,8 @@ function App() {
       setAllMessages,
       currentChatMembers,
       setCurrentChatMembers,
+      memberCount,
+      setMemberCount,
     }}>
       <div>
         {isOpenLoginPage && <Login/>}

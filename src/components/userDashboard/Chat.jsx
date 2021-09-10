@@ -41,6 +41,7 @@ const Chat = () => {
     currentChatName,
     currentChatMembers,
     setShowAddMemberForm,
+    memberCount,
   } = useContext(StatesContext);
   
   useEffect(() => {
@@ -80,7 +81,7 @@ const Chat = () => {
               ">
                 <p className="">Members</p>
                 <p className="text-gray-300 font-normal">|</p>
-                <p>{currentChatMembers.length}</p>
+                <p>{memberCount}</p>
               </button>
             }
           </div>
