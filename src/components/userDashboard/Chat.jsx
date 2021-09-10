@@ -83,8 +83,10 @@ const Chat = () => {
         { currentChatId !== null && allMessages !== undefined && allMessages.length > 0 &&
           allMessages.map((message, index) => (
             <div className={`flex flex-col mb-2 ${message.sender.id === loginUser.id ? 'self-end' : 'self-start'}`}>
-              <p className='text-sm self-start ml-1'> {message.sender.uid.replaceAll("@gmail.com", "").replaceAll("@yahoo.com", "")} </p>
-              <p key={index} className={`${message.sender.id === loginUser.id ? 'bg-purple-400 border-purple-400' : 'bg-gray-100'} mt-1 mb-2 py-2 px-3 max-w-max border-gray-300 border-2 rounded-lg self-start`}> {message.body}</p>
+              { message.sender.id !== loginUser.id &&
+                <p className='text-sm self-start ml-1'> {message.sender.uid.replaceAll("@gmail.com", "").replaceAll("@yahoo.com", "")} </p>
+              } 
+              <p key={index} className={`${message.sender.id === loginUser.id ? 'self-end bg-purple-300' : 'bg-gray-200'} mt-1 mb-2 py-2 px-3 max-w-max rounded-lg self-start`}> {message.body}</p>
             </div>
             ))
         }
