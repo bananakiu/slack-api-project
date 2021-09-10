@@ -2,7 +2,6 @@ import axios from 'axios';
 import React from 'react';
 import { API, StatesContext } from '../../App';
 import { useState, useEffect, useContext } from 'react';
-import GetAllChannels from './GetAllChannels';
 import ChatBox from './ChatBox';
 
 export const retrieveAllMessages = (
@@ -50,12 +49,11 @@ const Chat = () => {
   return (
     // Chat container
     <div className='
-    flex-col flex-grow
+    flex flex-col flex-grow
     ml-6
     rounded-2xl shadow-inner
     bg-gray-50
     h-full
-    border-8
     '>
         <div className='
         flex justify-between items-center flex-none

@@ -32,16 +32,13 @@ const AddDirectMessage = () => {
     })
 
     return (
-            <form onSubmit={handleSubmit(onSubmit)} tabIndex="-1" className="
-            flex flex-col items-center justify-center h-30 w-50 mb-3 bg-gray-100 rounded-2xl object-scale-down
+            <form onSubmit={handleSubmit(onSubmit)} className="
+            flex flex-col items-center justify-center flex-grow-0
+            h-20 mt-2
             ">
                 <h1 className="
-                self-start text-left
-                text-2xl font-bold
-                mb-4
-                ">
-                    Add a person to chat with!
-                </h1>
+                font-semibold text-lg self-start
+                ">Direct Messages</h1>
                 {/* {errors.length>0 &&
                     <div className="
                     flex flex-col justify-center items-center
@@ -52,10 +49,8 @@ const AddDirectMessage = () => {
                 } */}
                 <div className="
                 flex flex-col justify-center items-center
-                mb-4
                 w-full
                 ">
-                    <label htmlFor="user_id" className="self-start">Chat with: </label> 
                     <Controller
                         name="user_id"
                         isClearable

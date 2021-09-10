@@ -2,7 +2,7 @@ import SidebarRow from './SidebarRow';
 import React, { useContext } from 'react';
 import { StatesContext } from '../../App';
 
-const GetAllChannels = () => {
+const SideBarList = () => {
     const { allChannels } = useContext(StatesContext);
 
     const displayAllAvailableChannels = (allChannels) => {    
@@ -24,16 +24,18 @@ const GetAllChannels = () => {
         }
     }
         return (
-            <>
-                <div className="flex flex-col w-56 bg-white rounded-2xl overflow-hidden border-2">
-                    <h1 className="text-3xl uppercase text-red-500">Channels</h1>
-                    <ul className="flex flex-col py-4 ">
-                        {displayAllAvailableChannels(allChannels)}
-                    </ul>
-                </div>
-            </>
+            <div className="
+            flex flex-col flex-grow min-h-0
+            ">
+                <h1 className="
+                font-semibold text-lg py-2
+                ">Channels</h1>
+                <ul className="flex flex-col overflow-y-auto">
+                    {displayAllAvailableChannels(allChannels)}
+                </ul>
+            </div>
         )
     }
 
 
-export default GetAllChannels;
+export default SideBarList;
