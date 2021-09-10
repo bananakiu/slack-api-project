@@ -20,7 +20,7 @@ export const retrieveAllMessages = (
       uid: loginHeaders.uid,
     },
   }).then((response) => {
-    // console.log(response.data.data);
+    console.log(response.data.data);
     const retrieveMessages = response.data.data;
     // Make a useState for retrieving messages 
     setAllMessages(retrieveMessages);
@@ -40,6 +40,7 @@ const Chat = () => {
     currentChatName,
     currentChatMembers,
     setShowAddMemberForm,
+    loginUser
   } = useContext(StatesContext);
   
   useEffect(() => {
@@ -89,12 +90,19 @@ const Chat = () => {
 
       {/*List out all the messages */}
       <div className='
+      flex
+      flex-col
       flex-grow
       p-4
       overflow-y-auto
       '>
         { currentChatId !== null && allMessages !== undefined && allMessages.length > 0 &&
-          allMessages.map((message, index) => (<p key={index} className='m-1 mb-2 py-2 px-3 max-w-max border-gray-300 border-2 rounded-lg '> {message.body}</p>))
+          allMessages.map((message, index) => (
+            <div className={`flex flex-col mb-2 ${message.sender.id === loginUser.id ? 'self-end' : 'self-start'}`}>
+              <p className='text-sm'> {message.sender.uid} </p>
+              <p key={index} className={`${message.sender.id === loginUser.id ? 'bg-purple-200' : 'bg-gray-100'} mt-1 mb-2 py-2 px-3 max-w-max border-gray-300 border-2 rounded-lg self-end`}> {message.body}</p>
+            </div>
+            ))
         }
         {/* default message */}
         { currentChatId !== null && allMessages !== undefined && allMessages.length === 0 &&
