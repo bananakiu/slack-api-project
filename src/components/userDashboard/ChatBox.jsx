@@ -12,12 +12,14 @@ const ChatBox = () => {
     loginHeaders,
     currentChatType,
     currentChatId,
+    setCurrentChatId,
     setAllMessages,
   } = useContext(StatesContext);
 
   // Collects messages from form // Done
-  const onSubmit = (data) => {
+  const onSubmit = (data, e) => {
     console.log(data);
+    e.target.reset();
 
     let createdMessage = {
       "receiver_id": currentChatId,
