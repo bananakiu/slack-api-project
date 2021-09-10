@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import Modal from '../common/Modal';
 import ErrorDisplay from '../common/ErrorDisplay';
 import { useForm, Controller } from 'react-hook-form';
@@ -15,7 +15,8 @@ const searchMember = (allUsers, id) => {
 
 const AddMemberForm = () => {
     const { register, handleSubmit, control } = useForm();
-    const [ errors, setErrors ] = useState([]);
+    const [errors, setErrors] = useState([]);
+    const [options, setOptions] = useState([]);
 
     const { 
         loginHeaders,
@@ -70,16 +71,19 @@ const AddMemberForm = () => {
         }
     }
 
-    // preprocessing form inputs
-    let allUsersOptions = allUsers.map((indivUser) => {
-        return {
-            value: indivUser.id,
-            label: `${indivUser.uid}`,
-        }
-    })
-
-    // filter out existing members of the channel
-    allUsersOptions = allUsersOptions.filter((indivUser) => !currentChatMembers.includes(indivUser.value));
+    useEffect(() => {
+        // preprocessing form inputs
+        let allUsersOptions = allUsers.map((indivUser) => {
+            return {
+                value: indivUser.id,
+                label: `${indivUser.uid}`,
+            }
+        })
+        // filter out existing members of the channel
+        allUsersOptions = allUsersOptions.filter((indivUser) => !currentChatMembers.includes(indivUser.value));
+        setOptions(allUsersOptions);
+    }, [currentChatMembers])
+    
 
     // render
     return (
@@ -119,7 +123,7 @@ const AddMemberForm = () => {
                         render={({ field }) => (
                             <Select
                                 {...field}
-                                options={allUsersOptions}
+                                options={options}
                                 isSearchable
                                 required
                                 placeholder="Person to add"

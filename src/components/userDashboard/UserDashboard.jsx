@@ -50,7 +50,8 @@ export const getAllChannelsDetails = (allAvailableChannels, loginHeaders, setAll
       channelDetailsList.push(response.data.data);
       setAllChannelsDetails(channelDetailsList);
     }).catch((error) => {
-      console.error(error.response.data.errors);
+      console.log(error);
+      console.error(error?.response?.data?.errors);
     })
   })
 }
@@ -66,10 +67,10 @@ const UserDashboard = () => {
     showAddMemberForm,
     allChannelsDetails,
     setAllChannelsDetails,
-    currentChannelId,
     setAllMessages,
     currentChatId,
     currentChatType,
+    setCurrentChatMembers,
   } = useContext(StatesContext);
 
   const getAlluserData = () => {
@@ -106,6 +107,26 @@ const UserDashboard = () => {
   useEffect(() => {
     retrieveAllMessages(loginHeaders, setAllMessages, currentChatId, currentChatType);
   }, [currentChatId])
+
+  // useEffect(() => {
+  //   let thisChannelDetails = allChannelsDetails.filter(channel => channel.id === currentChatId)[0];
+  //   if (thisChannelDetails?.channel_members !== undefined) {
+  //     let thisChannelMembers = thisChannelDetails.channel_members.map(memberObj => memberObj.user_id);
+  //     setCurrentChatMembers(thisChannelMembers);
+  //   }
+  // }, [allChannelsDetails])
+
+  // TODO: find out less hacky way to do this
+  useEffect(() => {
+    setTimeout(() => {
+      let thisChannelDetails = allChannelsDetails.filter(channel => channel.id === currentChatId)[0];
+      if (thisChannelDetails?.channel_members !== undefined) {
+        let thisChannelMembers = thisChannelDetails.channel_members.map(memberObj => memberObj.user_id);
+        setCurrentChatMembers(thisChannelMembers);
+      }
+    }, 20)
+  }, [allChannelsDetails])
+
 
   return (
     <>
