@@ -15,9 +15,8 @@ const AddDirectMessage = () => {
         currentChatName,setCurrentChatName} = useContext(StatesContext);
 
     const onSubmit = (data) => {
-        console.log(data)
         if(data.user_id?.label !== undefined && data.user_id?.value !== undefined) {
-            // console.log(data)
+            // console.log(JSON.parse(JSON.stringify(data.user_id))) // ! TEMP
             setCurrentChatName(data.user_id.label);
             setCurrentChatId(data.user_id.value);
             setCurrentChatType("User");

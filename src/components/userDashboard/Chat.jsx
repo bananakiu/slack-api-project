@@ -42,10 +42,6 @@ const Chat = () => {
     setShowAddMemberForm,
     loginUser
   } = useContext(StatesContext);
-  
-  useEffect(() => {
-    retrieveAllMessages(loginHeaders, setAllMessages, currentChatId, currentChatType);
-  }, [currentChatId])
 
   return (
     // Chat container
