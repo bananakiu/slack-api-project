@@ -67,7 +67,7 @@ const CreateNewChannelForm = () => {
     let allUsersOptions = allUsers.map((indivUser) => {
         return {
             value: indivUser.id,
-            label: `${indivUser.id} | ${indivUser.uid}`,
+            label: `${indivUser.uid}`,
         }
     })
 
