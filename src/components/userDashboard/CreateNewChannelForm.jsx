@@ -5,6 +5,7 @@ import { useForm, Controller } from 'react-hook-form';
 import Select from 'react-select';
 import axios from "axios";
 import { API, StatesContext } from '../../App';
+import {getAllChannelsDetails, getAllChannels} from '../userDashboard/UserDashboard';
 
 // TODO: change style of react-select selector
 
@@ -12,7 +13,14 @@ const CreateNewChannelForm = () => {
     const { register, handleSubmit, control } = useForm();
     const [ errors, setErrors ] = useState([]);
 
-    const { loginUser, loginHeaders, allUsers, setShowCreateChannelForm } = useContext(StatesContext);
+    const { 
+        loginUser,
+        loginHeaders,
+        allUsers,
+        setShowCreateChannelForm,
+        setAllChannels,
+        setAllChannelsDetails,
+    } = useContext(StatesContext);
     
     const onSubmit = (data) => {
         if(data?.user_ids !== undefined && data?.user_ids !== undefined) {
@@ -53,8 +61,7 @@ const CreateNewChannelForm = () => {
                     alert("Channel created!");
 
                     // trigger updating channels in app
-
-                    // empty form fields
+                    getAllChannels(loginHeaders, setAllChannels, getAllChannelsDetails, setAllChannelsDetails)
             
                     // close modal
                     setShowCreateChannelForm(false);

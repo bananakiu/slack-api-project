@@ -9,6 +9,53 @@ import AddMemberForm from './AddMemberForm';
 import AddDirectMessage from './AddDirectMessage';
 import { retrieveAllMessages } from './Chat';
 
+export const getAllChannels = (loginHeaders, setAllChannels, getAllChannelsDetails, setAllChannelsDetails) => {
+  axios({
+    method: 'GET',
+    url: `${API}/api/v1/channels`,
+    headers: {
+      "access-token": loginHeaders["access-token"],
+      client: loginHeaders.client,
+      expiry: loginHeaders.expiry,
+      uid: loginHeaders.uid,
+    },
+  }).then((response) => {
+    const allAvailableChannels = (response.data.data);
+    setAllChannels(allAvailableChannels);
+    return allAvailableChannels;
+  }).then((channelData) => {
+    if (channelData) {
+      getAllChannelsDetails(channelData, loginHeaders, setAllChannelsDetails);
+    } else {
+      setAllChannelsDetails([]);
+    }
+  }).catch((error) => {
+    console.error(error?.response?.data?.errors);
+  })
+}
+
+export const getAllChannelsDetails = (allAvailableChannels, loginHeaders, setAllChannelsDetails) => {
+  let channelDetailsList  = [];
+  allAvailableChannels.forEach(channel => {
+    axios({
+      method: 'GET',
+      url: `${API}/api/v1/channels/${channel.id}`,
+      headers: {
+        "access-token": loginHeaders["access-token"],
+        client: loginHeaders.client,
+        expiry: loginHeaders.expiry,
+        uid: loginHeaders.uid,
+      },
+    }).then((response) => {
+      channelDetailsList.push(response.data.data);
+      setAllChannelsDetails(channelDetailsList);
+    }).catch((error) => {
+      console.log(error);
+      console.error(error?.response?.data?.errors);
+    })
+  })
+}
+
 const UserDashboard = () => {
   const {
     loginHeaders,
@@ -20,10 +67,10 @@ const UserDashboard = () => {
     showAddMemberForm,
     allChannelsDetails,
     setAllChannelsDetails,
-    currentChannelId,
     setAllMessages,
     currentChatId,
     currentChatType,
+    setCurrentChatMembers,
   } = useContext(StatesContext);
 
   const getAlluserData = () => {
@@ -52,60 +99,34 @@ const UserDashboard = () => {
       });
   };
 
-  const getAllChannels = () => {
-    axios({
-      method: 'GET',
-      url: `${API}/api/v1/channels`,
-      headers: {
-        "access-token": loginHeaders["access-token"],
-        client: loginHeaders.client,
-        expiry: loginHeaders.expiry,
-        uid: loginHeaders.uid,
-      },
-    }).then((response) => {
-      const allAvailableChannels = (response.data.data);
-      setAllChannels(allAvailableChannels);
-      return allAvailableChannels;
-    }).then((channelData) => {
-      if (channelData) {
-        getAllChannelDetails(channelData);
-      } else {
-        setAllChannelsDetails([]);
-      }
-    }).catch((error) => {
-      console.error(error?.response?.data?.errors);
-    })
-  }
-
-  const getAllChannelDetails = (allAvailableChannels) => {
-    let channelDetailsList  = [];
-    allAvailableChannels.forEach(channel => {
-      axios({
-        method: 'GET',
-        url: `${API}/api/v1/channels/${channel.id}`,
-        headers: {
-          "access-token": loginHeaders["access-token"],
-          client: loginHeaders.client,
-          expiry: loginHeaders.expiry,
-          uid: loginHeaders.uid,
-        },
-      }).then((response) => {
-        channelDetailsList.push(response.data.data);
-        setAllChannelsDetails(channelDetailsList);
-      }).catch((error) => {
-        console.error(error.response.data.errors);
-      })
-    })
-  }
-
   useEffect(() => {
-      getAllChannels();
+      getAllChannels(loginHeaders, setAllChannels, getAllChannelsDetails, setAllChannelsDetails);
       getAlluserData();
   }, [])
 
   useEffect(() => {
     retrieveAllMessages(loginHeaders, setAllMessages, currentChatId, currentChatType);
   }, [currentChatId])
+
+  // useEffect(() => {
+  //   let thisChannelDetails = allChannelsDetails.filter(channel => channel.id === currentChatId)[0];
+  //   if (thisChannelDetails?.channel_members !== undefined) {
+  //     let thisChannelMembers = thisChannelDetails.channel_members.map(memberObj => memberObj.user_id);
+  //     setCurrentChatMembers(thisChannelMembers);
+  //   }
+  // }, [allChannelsDetails])
+
+  // TODO: find out less hacky way to do this
+  useEffect(() => {
+    setTimeout(() => {
+      let thisChannelDetails = allChannelsDetails.filter(channel => channel.id === currentChatId)[0];
+      if (thisChannelDetails?.channel_members !== undefined) {
+        let thisChannelMembers = thisChannelDetails.channel_members.map(memberObj => memberObj.user_id);
+        setCurrentChatMembers(thisChannelMembers);
+      }
+    }, 20)
+  }, [allChannelsDetails])
+
 
   return (
     <>
