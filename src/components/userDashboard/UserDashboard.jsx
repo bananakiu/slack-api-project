@@ -49,22 +49,28 @@ const UserDashboard = () => {
   };
 
   const getAllChannels = () => {
-      axios({
-          method: 'GET',
-          url: `${API}/api/v1/channels`,
-          headers: {
-              "access-token": loginHeaders["access-token"],
-              client: loginHeaders.client,
-              expiry: loginHeaders.expiry,
-              uid: loginHeaders.uid,
-          },
-      }).then((response) => {
-          const allAvailableChannels = (response.data.data);
-          setAllChannels(allAvailableChannels);
-          getAllChannelDetails(allAvailableChannels);
-      }).catch((error) => {
-          console.error(error.response.data.errors);
-      })
+    axios({
+      method: 'GET',
+      url: `${API}/api/v1/channels`,
+      headers: {
+        "access-token": loginHeaders["access-token"],
+        client: loginHeaders.client,
+        expiry: loginHeaders.expiry,
+        uid: loginHeaders.uid,
+      },
+    }).then((response) => {
+      const allAvailableChannels = (response.data.data);
+      setAllChannels(allAvailableChannels);
+      return allAvailableChannels;
+    }).then((channelData) => {
+      if (channelData) {
+        getAllChannelDetails(channelData);
+      } else {
+        setAllChannelsDetails(null);
+      }
+    }).catch((error) => {
+      console.error(error?.response?.data?.errors);
+    })
   }
 
   const getAllChannelDetails = (allAvailableChannels) => {

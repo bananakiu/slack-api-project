@@ -20,7 +20,7 @@ export const retrieveAllMessages = (
       uid: loginHeaders.uid,
     },
   }).then((response) => {
-    console.log(response.data.data);
+    // console.log(response.data.data);
     const retrieveMessages = response.data.data;
     // Make a useState for retrieving messages 
     setAllMessages(retrieveMessages);
