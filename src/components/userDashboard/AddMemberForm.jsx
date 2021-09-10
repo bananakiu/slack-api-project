@@ -5,6 +5,7 @@ import { useForm, Controller } from 'react-hook-form';
 import Select from 'react-select';
 import axios from "axios";
 import { API, StatesContext } from '../../App';
+import {getAllChannels, getAllChannelsDetails } from '../userDashboard/UserDashboard'
 
 // TODO: change style of react-select selector
 const searchMember = (allUsers, id) => {
@@ -23,6 +24,8 @@ const AddMemberForm = () => {
         currentChatId,
         currentChatMembers,
         currentChatName,
+        setAllChannels,
+        setAllChannelsDetails,
     } = useContext(StatesContext);
     
     const onSubmit = (data) => {
@@ -58,7 +61,8 @@ const AddMemberForm = () => {
                     alert("User added to channel!");
 
                     // TODO: re-get allChannels and alLChannelsDetails
-            
+                    getAllChannels(loginHeaders, setAllChannels, getAllChannelsDetails, setAllChannelsDetails)
+
                     // close modal
                     setShowAddMemberForm(false);
                 }
