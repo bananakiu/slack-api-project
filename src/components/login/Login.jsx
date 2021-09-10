@@ -25,6 +25,8 @@ const Login = () => {
       "password": data.password,
     }
 
+    console.log(loggedInUser)
+
     // handle errors
     errorList = handleErrors(loggedInUser, errorList);
 
@@ -38,7 +40,7 @@ const Login = () => {
       setLoginHeaders(response.headers);
     }).catch((error) => {
       // console.error(error.response.data.errors); // ! TEMP
-      errorList.push(...error.response.data.errors);
+      errorList.push(...error?.response?.data?.errors);
       setErrors(errorList);
     }).then(() => {
       if (errorList.length === 0) {
@@ -110,6 +112,7 @@ return (
                   Password
                 </label>
                 <input
+                  {...register("password")}
                   className="w-full content-center text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none focus:border-green-400"
                   type="password"
                   placeholder="Enter your password"
