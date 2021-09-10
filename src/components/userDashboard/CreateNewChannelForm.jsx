@@ -15,49 +15,52 @@ const CreateNewChannelForm = () => {
     const { loginUser, loginHeaders, allUsers, setShowCreateChannelForm } = useContext(StatesContext);
     
     const onSubmit = (data) => {
-        let errorList = [];
-    
-        // create channel obj
-        let createdChannel = {
-            name: data.name,
-            // user_ids: data.user_ids.map(option => option.value),
-            user_ids: [loginUser.id, ...data.user_ids.map(option => option.value)],
-        }
+        if(data?.user_ids !== undefined && data?.user_ids !== undefined) {
+
+            let errorList = [];
         
-        // POST to server
-        axios({
-            method: "POST",
-            url: `${API}/api/v1/channels`,
-            data: createdChannel,
-            headers: {
-                "access-token": loginHeaders["access-token"],
-                client: loginHeaders.client,
-                expiry: loginHeaders.expiry,
-                uid: loginHeaders.uid,
-            },
-        }).then((response) => {
-             // ! TEMP: while the API doesn't work the way it should,
-            if (response.data?.errors && response.data.errors.length > 0) {
-                errorList.push(...response.data.errors);
+            // create channel obj
+            let createdChannel = {
+                name: data.name,
+                // user_ids: data.user_ids.map(option => option.value),
+                user_ids: [loginUser.id, ...data.user_ids.map(option => option.value)],
+            }
+            
+            // POST to server
+            axios({
+                method: "POST",
+                url: `${API}/api/v1/channels`,
+                data: createdChannel,
+                headers: {
+                    "access-token": loginHeaders["access-token"],
+                    client: loginHeaders.client,
+                    expiry: loginHeaders.expiry,
+                    uid: loginHeaders.uid,
+                },
+            }).then((response) => {
+                // ! TEMP: while the API doesn't work the way it should,
+                if (response.data?.errors && response.data.errors.length > 0) {
+                    errorList.push(...response.data.errors);
+                    setErrors(errorList);
+                }
+            }).catch((error) => {
+                console.error(error.response.data.errors); // ! TEMP
+                errorList.push(...error.response.data.errors);
                 setErrors(errorList);
-            }
-        }).catch((error) => {
-            console.error(error.response.data.errors); // ! TEMP
-            errorList.push(...error.response.data.errors);
-            setErrors(errorList);
-        }).then(() => {
-            if (errorList.length === 0) {
-                // ! TEMP: alert (turn into nicer alerts)
-                alert("Channel created!");
+            }).then(() => {
+                if (errorList.length === 0) {
+                    // ! TEMP: alert (turn into nicer alerts)
+                    alert("Channel created!");
 
-                // trigger updating channels in app
+                    // trigger updating channels in app
 
-                // empty form fields
-        
-                // close modal
-                setShowCreateChannelForm(false);
-            }
-        })
+                    // empty form fields
+            
+                    // close modal
+                    setShowCreateChannelForm(false);
+                }
+            })
+        }
     }
 
     // preprocessing form inputs

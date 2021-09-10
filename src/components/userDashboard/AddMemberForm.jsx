@@ -26,42 +26,44 @@ const AddMemberForm = () => {
     } = useContext(StatesContext);
     
     const onSubmit = (data) => {
-        let errorList = [];
-    
-        // create request obj
-        let memberToAdd = {
-            id: currentChatId,
-            member_id: data.user_id.value,
-        }
+        if(data.user_id?.label !== undefined && data.user_id?.value !== undefined) {
+            let errorList = [];
         
-        // POST to server
-        axios({
-            method: "POST",
-            url: `${API}/api/v1/channel/add_member`,
-            data: memberToAdd,
-            headers: {
-                "access-token": loginHeaders["access-token"],
-                client: loginHeaders.client,
-                expiry: loginHeaders.expiry,
-                uid: loginHeaders.uid,
-            },
-        }).then((response) => {
-            // console.log(response.data.data); // ! TEMP
-        }).catch((error) => {
-            console.error(error.response.data.errors); // ! TEMP
-            errorList.push(...error.response.data.errors);
-            setErrors(errorList);
-        }).then(() => {
-            if (errorList.length === 0) {
-                // ! TEMP: alert (turn into nicer alerts)
-                alert("User added to channel!");
-
-                // TODO: re-get allChannels and alLChannelsDetails
-        
-                // close modal
-                setShowAddMemberForm(false);
+            // create request obj
+            let memberToAdd = {
+                id: currentChatId,
+                member_id: data.user_id.value,
             }
-        })
+            
+            // POST to server
+            axios({
+                method: "POST",
+                url: `${API}/api/v1/channel/add_member`,
+                data: memberToAdd,
+                headers: {
+                    "access-token": loginHeaders["access-token"],
+                    client: loginHeaders.client,
+                    expiry: loginHeaders.expiry,
+                    uid: loginHeaders.uid,
+                },
+            }).then((response) => {
+                // console.log(response.data.data); // ! TEMP
+            }).catch((error) => {
+                console.error(error.response.data.errors); // ! TEMP
+                errorList.push(...error.response.data.errors);
+                setErrors(errorList);
+            }).then(() => {
+                if (errorList.length === 0) {
+                    // ! TEMP: alert (turn into nicer alerts)
+                    alert("User added to channel!");
+
+                    // TODO: re-get allChannels and alLChannelsDetails
+            
+                    // close modal
+                    setShowAddMemberForm(false);
+                }
+            })
+        }
     }
 
     // preprocessing form inputs
