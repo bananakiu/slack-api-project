@@ -64,6 +64,7 @@ const AddDirectMessage = () => {
                                 placeholder="Select from this list"
                                 className="w-full text-left"
                                 setValue={handleSubmit(onSubmit)}
+                                menuPlacement="auto"
                                 // onChange={handleSubmit(onSubmit)}
                                 // styles={}
                             />
