@@ -55,52 +55,59 @@ const Chat = () => {
     bg-gray-50
     h-full
     '>
-        <div className='
-        flex justify-between items-center flex-none
-        border-b-2 border-lightgray-600
-        p-5 h-16
-        '>
-          <div>
-            <h4 className={`flex font-bold lowercase ${currentChatId === null ? "capitalize" : ""}`}>
-              {`${currentChatId === null ? "No Channel/User Selected" : currentChatName}`}
-            </h4>
-          </div>
-
-          <div className="
-          flex justify-center align-center
-          ">
-            {currentChatType === "Channel" &&
-              <button type="button" onClick={() => setShowAddMemberForm(true)} className="
-              flex justify-between align-center
-              border-gray-300 border-2 hover:bg-gray-200 rounded-lg
-              w-32 px-2
-              text-center text-gray-500 font-semibold
-              ">
-                <p className="">Members</p>
-                <p className="text-gray-300 font-normal">|</p>
-                <p>{currentChatMembers.length}</p>
-              </button>
-            }
-          </div>
+      {/* header */}
+      <div className='
+      flex justify-between items-center flex-none
+      border-b-2 border-lightgray-600
+      p-4 h-16
+      '>
+        {/* channel name */}
+        <div>
+          <h4 className={`flex font-bold lowercase ${currentChatId === null ? "capitalize" : ""}`}>
+            {`${currentChatId === null ? "No Channel/User Selected" : currentChatName}`}
+          </h4>
         </div>
 
-        {/*List out all the messages */}
-        <div className='mt-5 overflow-y-auto flex-grow'>
-          { currentChatId !== null && allMessages !== undefined && allMessages.length > 0 &&
-            allMessages.map((message, index) => (<p key={index} className='m-1 mb-2 py-2 px-3 max-w-max border-gray-300 border-2 rounded-lg '> {message.body}</p>))
-          }
-          {/* default message */}
-          { currentChatId !== null && allMessages !== undefined && allMessages.length === 0 &&
-            <p>No message history.</p>
-          }
-          {/* default message */}
-          { currentChatId === null &&
-            <p>Select a channel or user to chat with.</p>
+        {/* member info button */}
+        <div className="
+        flex justify-center align-center
+        ">
+          {currentChatType === "Channel" &&
+            <button type="button" onClick={() => setShowAddMemberForm(true)} className="
+            flex justify-between align-center
+            border-gray-300 border-2 hover:bg-gray-200 rounded-lg
+            w-32 px-2
+            text-center text-gray-500 font-semibold
+            ">
+              <p className="">Members</p>
+              <p className="text-gray-300 font-normal">|</p>
+              <p>{currentChatMembers.length}</p>
+            </button>
           }
         </div>
+      </div>
 
-        {/* Chat box component */}
-        <ChatBox />
+      {/*List out all the messages */}
+      <div className='
+      flex-grow
+      p-4
+      overflow-y-auto
+      '>
+        { currentChatId !== null && allMessages !== undefined && allMessages.length > 0 &&
+          allMessages.map((message, index) => (<p key={index} className='m-1 mb-2 py-2 px-3 max-w-max border-gray-300 border-2 rounded-lg '> {message.body}</p>))
+        }
+        {/* default message */}
+        { currentChatId !== null && allMessages !== undefined && allMessages.length === 0 &&
+          <p>No message history.</p>
+        }
+        {/* default message */}
+        { currentChatId === null &&
+          <p>Select a channel or user to chat with.</p>
+        }
+      </div>
+
+      {/* Chat box component */}
+      <ChatBox />
     </div>
   );
 };
