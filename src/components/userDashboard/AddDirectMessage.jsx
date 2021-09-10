@@ -18,8 +18,8 @@ const AddDirectMessage = () => {
         if(data.user_id?.label !== undefined && data.user_id?.value !== undefined) {
             // console.log(data)
             setCurrentChatName(data.user_id.label);
-            setCurrentChatId(data.user_id.value);
             setCurrentChatType("User");
+            setCurrentChatId(data.user_id.value);
         }
     }
 
@@ -63,6 +63,7 @@ const AddDirectMessage = () => {
                                 placeholder="Select from this list"
                                 className="w-full text-left"
                                 setValue={handleSubmit(onSubmit)}
+                                // onChange={()=>handleSubmit(onSubmit)}
                                 menuPlacement="auto"
                                 // onChange={handleSubmit(onSubmit)}
                                 // styles={}

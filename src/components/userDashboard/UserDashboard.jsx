@@ -7,6 +7,7 @@ import Chat from './Chat';
 import UserProfile from './UserProfile';
 import AddMemberForm from './AddMemberForm';
 import AddDirectMessage from './AddDirectMessage';
+import { retrieveAllMessages } from './Chat';
 
 const UserDashboard = () => {
   const {
@@ -20,6 +21,9 @@ const UserDashboard = () => {
     allChannelsDetails,
     setAllChannelsDetails,
     currentChannelId,
+    setAllMessages,
+    currentChatId,
+    currentChatType,
   } = useContext(StatesContext);
 
   const getAlluserData = () => {
@@ -98,6 +102,11 @@ const UserDashboard = () => {
       getAllChannels();
       getAlluserData();
   }, [])
+
+  useEffect(() => {
+    retrieveAllMessages(loginHeaders, setAllMessages, currentChatId, currentChatType);
+    console.log(currentChatType)
+  }, [currentChatId])
 
   return (
     <>

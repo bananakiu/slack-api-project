@@ -42,10 +42,6 @@ const Chat = () => {
     setShowAddMemberForm,
     loginUser
   } = useContext(StatesContext);
-  
-  useEffect(() => {
-    retrieveAllMessages(loginHeaders, setAllMessages, currentChatId, currentChatType);
-  }, [currentChatId])
 
   return (
     // Chat container
@@ -82,11 +78,11 @@ const Chat = () => {
       <div className='flex flex-col flex-grow p-4 overflow-y-auto'>
         { currentChatId !== null && allMessages !== undefined && allMessages.length > 0 &&
           allMessages.map((message, index) => (
-            <div className={`flex flex-col mb-2 ${message.sender.id === loginUser.id ? 'self-end' : 'self-start'}`}>
+            <div key={index} className={`flex flex-col mb-2 ${message.sender.id === loginUser.id ? 'self-end' : 'self-start'}`}>
               { message.sender.id !== loginUser.id &&
                 <p className='text-sm self-start ml-1'> {message.sender.uid.replaceAll("@gmail.com", "").replaceAll("@yahoo.com", "")} </p>
               } 
-              <p key={index} className={`${message.sender.id === loginUser.id ? 'self-end bg-purple-300' : 'bg-gray-200'} mt-1 mb-2 py-2 px-3 max-w-max rounded-lg self-start`}> {message.body}</p>
+              <p className={`${message.sender.id === loginUser.id ? 'self-end bg-purple-300' : 'bg-gray-200'} mt-1 mb-2 py-2 px-3 max-w-max rounded-lg self-start`}> {message.body}</p>
             </div>
             ))
         }
