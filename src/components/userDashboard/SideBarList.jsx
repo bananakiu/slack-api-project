@@ -30,7 +30,7 @@ const SideBarList = () => {
     }
         return (
             <div className="
-            flex flex-col flex-grow min-h-0
+            flex flex-col flex-grow min-h-0 mb-1
             ">
                 <h1
                 onMouseOver={() => setShowAddButton(true)}

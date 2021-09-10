@@ -49,19 +49,9 @@ const Chat = () => {
 
   return (
     // Chat container
-    <div className='
-    flex flex-col flex-grow
-    ml-6
-    rounded-2xl shadow-inner
-    bg-gray-50
-    h-full
-    '>
+    <div className='flex flex-col flex-grow ml-6 rounded-2xl shadow-inner bg-gray-50 h-full'>
       {/* header */}
-      <div className='
-      flex justify-between items-center flex-none
-      border-b-2 border-lightgray-600
-      p-4 h-16
-      '>
+      <div className='flex justify-between items-center flex-none border-b-2 border-lightgray-600 p-4 h-16'>
         {/* channel name */}
         <div>
           <h4 className={`flex font-bold lowercase ${currentChatId === null ? "capitalize" : ""}`}>
@@ -89,18 +79,12 @@ const Chat = () => {
       </div>
 
       {/*List out all the messages */}
-      <div className='
-      flex
-      flex-col
-      flex-grow
-      p-4
-      overflow-y-auto
-      '>
+      <div className='flex flex-col flex-grow p-4 overflow-y-auto'>
         { currentChatId !== null && allMessages !== undefined && allMessages.length > 0 &&
           allMessages.map((message, index) => (
             <div className={`flex flex-col mb-2 ${message.sender.id === loginUser.id ? 'self-end' : 'self-start'}`}>
-              <p className='text-sm'> {message.sender.uid} </p>
-              <p key={index} className={`${message.sender.id === loginUser.id ? 'bg-purple-200' : 'bg-gray-100'} mt-1 mb-2 py-2 px-3 max-w-max border-gray-300 border-2 rounded-lg self-end`}> {message.body}</p>
+              <p className='text-sm self-start ml-1'> {message.sender.uid.replaceAll("@gmail.com", "").replaceAll("@yahoo.com", "")} </p>
+              <p key={index} className={`${message.sender.id === loginUser.id ? 'bg-purple-400 border-purple-400' : 'bg-gray-100'} mt-1 mb-2 py-2 px-3 max-w-max border-gray-300 border-2 rounded-lg self-start`}> {message.body}</p>
             </div>
             ))
         }
@@ -110,12 +94,12 @@ const Chat = () => {
         }
         {/* default message */}
         { currentChatId === null &&
-          <p>Select a channel or user to chat with.</p>
+          <p className='justify-self-end self-center'>Select a channel or user to chat with.</p>
         }
       </div>
 
       {/* Chat box component */}
-      <ChatBox />
+      { currentChatId === null && <ChatBox /> }
     </div>
   );
 };
