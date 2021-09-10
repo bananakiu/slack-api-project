@@ -99,7 +99,7 @@ const Chat = () => {
       </div>
 
       {/* Chat box component */}
-      { currentChatId === null && <ChatBox /> }
+      { currentChatId !== null && <ChatBox /> }
     </div>
   );
 };
