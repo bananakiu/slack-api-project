@@ -137,7 +137,7 @@ const Signup = () => {
             <div>
               <button
                 type="submit"
-                className="mt-7 -mb-7 w-full flex justify-center bg-purple-600  hover:bg-green-500 text-gray-100 p-3  rounded-full tracking-wide font-semibold  shadow-lg cursor-pointer transition ease-in duration-500"
+                className="mt-7 -mb-7 w-full flex justify-center bg-purple-600  hover:bg-purple-800 text-gray-100 p-3  rounded-full tracking-wide font-semibold  shadow-lg cursor-pointer transition ease-in duration-500"
               >
                 Create
               </button>
@@ -145,7 +145,7 @@ const Signup = () => {
             <div className="flex flex-col items-center justify-center mt-10 text-center text-md text-gray-500">
               <a
                 href="#"
-                className="mt-5 font-bold text-green-500 hover:text-indigo-500 no-underline hover:underline cursor-pointer transition ease-in duration-300"
+                className="mt-5 font-bold text-indigo-500 hover:text-indigo-600 no-underline hover:underline cursor-pointer transition ease-in duration-300"
                 onClick={() => openPage("login")}
               >
                 Already have an account?
