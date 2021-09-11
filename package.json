@@ -1,6 +1,6 @@
 {
-  "homepage": "https://myusername.github.io/slack-api-project",
   "name": "slack-api-project",
+  "homepage": "https://myusername.github.io/slack-api-project",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
