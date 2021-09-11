@@ -1,22 +1,24 @@
 {
   "files": {
-    "main.css": "/slack-api-project/static/css/main.c7bbb44a.chunk.css",
-    "main.js": "/slack-api-project/static/js/main.a046df4b.chunk.js",
-    "main.js.map": "/slack-api-project/static/js/main.a046df4b.chunk.js.map",
-    "runtime-main.js": "/slack-api-project/static/js/runtime-main.5c36ac6e.js",
-    "runtime-main.js.map": "/slack-api-project/static/js/runtime-main.5c36ac6e.js.map",
-    "static/js/2.9ec719c7.chunk.js": "/slack-api-project/static/js/2.9ec719c7.chunk.js",
-    "static/js/2.9ec719c7.chunk.js.map": "/slack-api-project/static/js/2.9ec719c7.chunk.js.map",
-    "static/js/3.e9f11a7c.chunk.js": "/slack-api-project/static/js/3.e9f11a7c.chunk.js",
-    "static/js/3.e9f11a7c.chunk.js.map": "/slack-api-project/static/js/3.e9f11a7c.chunk.js.map",
+    "main.css": "/slack-api-project/static/css/main.e6d65545.chunk.css",
+    "main.js": "/slack-api-project/static/js/main.dd528357.chunk.js",
+    "main.js.map": "/slack-api-project/static/js/main.dd528357.chunk.js.map",
+    "runtime-main.js": "/slack-api-project/static/js/runtime-main.a0866984.js",
+    "runtime-main.js.map": "/slack-api-project/static/js/runtime-main.a0866984.js.map",
+    "static/js/2.3738f86c.chunk.js": "/slack-api-project/static/js/2.3738f86c.chunk.js",
+    "static/js/2.3738f86c.chunk.js.map": "/slack-api-project/static/js/2.3738f86c.chunk.js.map",
+    "static/js/3.a4745288.chunk.js": "/slack-api-project/static/js/3.a4745288.chunk.js",
+    "static/js/3.a4745288.chunk.js.map": "/slack-api-project/static/js/3.a4745288.chunk.js.map",
     "index.html": "/slack-api-project/index.html",
-    "static/css/main.c7bbb44a.chunk.css.map": "/slack-api-project/static/css/main.c7bbb44a.chunk.css.map",
-    "static/js/2.9ec719c7.chunk.js.LICENSE.txt": "/slack-api-project/static/js/2.9ec719c7.chunk.js.LICENSE.txt"
+    "static/css/main.e6d65545.chunk.css.map": "/slack-api-project/static/css/main.e6d65545.chunk.css.map",
+    "static/js/2.3738f86c.chunk.js.LICENSE.txt": "/slack-api-project/static/js/2.3738f86c.chunk.js.LICENSE.txt",
+    "static/media/Fireside.8027bf54.png": "/slack-api-project/static/media/Fireside.8027bf54.png",
+    "static/media/default_dp.b042d8fa.png": "/slack-api-project/static/media/default_dp.b042d8fa.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.5c36ac6e.js",
-    "static/js/2.9ec719c7.chunk.js",
-    "static/css/main.c7bbb44a.chunk.css",
-    "static/js/main.a046df4b.chunk.js"
+    "static/js/runtime-main.a0866984.js",
+    "static/js/2.3738f86c.chunk.js",
+    "static/css/main.e6d65545.chunk.css",
+    "static/js/main.dd528357.chunk.js"
   ]
 }
