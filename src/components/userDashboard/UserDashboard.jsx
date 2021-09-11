@@ -124,7 +124,7 @@ const UserDashboard = () => {
         let thisChannelMembers = thisChannelDetails.channel_members.map(memberObj => memberObj.user_id);
         setCurrentChatMembers(thisChannelMembers);
       }
-    }, 20)
+    }, 1000)
   }, [allChannelsDetails])
 
 
