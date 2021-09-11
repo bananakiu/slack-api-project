@@ -37,9 +37,12 @@ const Login = () => {
       setLoginUser(response.data.data);
       setLoginHeaders(response.headers);
     }).catch((error) => {
+      console.log(error);
       // console.error(error.response.data.errors); // ! TEMP
-      errorList.push(...error?.response?.data?.errors);
-      setErrors(errorList);
+      if (error?.response?.data?.errors !== undefined) {
+        errorList.push(...error?.response?.data?.errors);
+        setErrors(errorList);
+      }
     }).then(() => {
       if (errorList.length === 0) {
         // login (change visible components)
