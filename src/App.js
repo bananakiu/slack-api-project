@@ -3,7 +3,8 @@ import Signup from './components/login/Signup';
 import UserDashboard from './components/userDashboard/UserDashboard';
 import React, { useState } from 'react';
 
-export const API = 'http://206.189.91.54';
+// export const API = 'http://206.189.91.54';
+export const API = 'https://slackapi.avionschool.com';
 export const StatesContext = React.createContext();
 
 function App() {
